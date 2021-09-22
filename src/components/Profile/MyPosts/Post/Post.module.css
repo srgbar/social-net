@@ -1,0 +1,10 @@
+.item {
+    color: #309e82;
+    font-style: italic;
+}
+
+.item img {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+}
