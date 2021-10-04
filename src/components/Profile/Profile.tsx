@@ -1,15 +1,17 @@
 import React from 'react';
-import s from './Profile.module.css';
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPosts from "./MyPosts/MyPosts";
-import {ProfilePageType} from '../../redux/state';
+import {CallbackType, ProfilePageType} from '../../redux/state';
 
-
-const Profile = (props: ProfilePageType) => {
+const Profile = (props: ProfilePageType & CallbackType) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts posts={props.posts} addPostCallback={props.addPostCallback}/>
+            <MyPosts posts={props.posts}
+                     newPostText={props.newPostText}
+                     addPostCallback={props.addPostCallback}
+                     updateNewPostTextCallback={props.updateNewPostTextCallback}
+            />
         </div>
     )
 }

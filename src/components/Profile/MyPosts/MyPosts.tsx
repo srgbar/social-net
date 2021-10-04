@@ -1,13 +1,13 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {ProfilePageType} from '../../../redux/state';
+import {CallbackType, ProfilePageType} from '../../../redux/state';
 
 
-const MyPosts = (props: ProfilePageType) => {
+const MyPosts = (props: ProfilePageType & CallbackType) => {
 
     let postsElements =
-        props.posts.map((p) => <Post id={p.id} message={p.message} likesCount={p.likesCount}/>);
+        props.posts.map((p) => <Post key={p.id} id={p.id} message={p.message} likesCount={p.likesCount}/>);
 
     let newPostElement = React.createRef<HTMLTextAreaElement>();
 
@@ -18,12 +18,22 @@ const MyPosts = (props: ProfilePageType) => {
         }
     }
 
+    let onPostChange = () => {
+        if (newPostElement.current) {
+            props.updateNewPostTextCallback(newPostElement.current.value)
+            newPostElement.current.value = "";
+        }
+    }
+
     return (
         <div className={s.postsBlock}>
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea ref={newPostElement}></textarea>
+                    <textarea
+                        onChange={onPostChange}
+                        ref={newPostElement}
+                        value={props.newPostText}/>
                 </div>
                 <div>
                     <button onClick={addPost}>Add post</button>
