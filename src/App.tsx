@@ -5,9 +5,16 @@ import Navbar from "./components/Navbar/Navbar";
 import Dialogs from './components/Dialogs/Dialogs';
 import Profile from "./components/Profile/Profile";
 import {Route} from "react-router-dom";
-import state, {addPost, updateNewPostText} from "./redux/state";
+import {StoreType} from "./redux/state";
 
-const App = () => {
+type PropsType = {
+    store: StoreType
+}
+
+const App: React.FC<PropsType> = (props) => {
+
+    const state = props.store.getState();
+
     return (
         <div className="app-wrapper">
             <Header/>
@@ -22,8 +29,8 @@ const App = () => {
                        render={() => <Profile
                            posts={state.profilePage.posts}
                            newPostText={state.profilePage.newPostText}
-                           addPostCallback={addPost}
-                           updateNewPostTextCallback={updateNewPostText}
+                           addPostCallback={props.store.addPost.bind(props.store)}
+                           updateNewPostTextCallback={props.store.updateNewPostText.bind(props.store)}
                        />}/>
             </div>
         </div>
