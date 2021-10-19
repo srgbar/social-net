@@ -1,26 +1,25 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {CallbackType, ProfilePageType} from '../../../redux/state';
+import {addPostAC, DispatchType, ProfilePageType, updateNewPostTextAC} from '../../../redux/state';
 
+const MyPosts = (props: ProfilePageType & DispatchType) => {
 
-const MyPosts = (props: ProfilePageType & CallbackType) => {
-
-    let postsElements =
+    const postsElements =
         props.posts.map((p) => <Post key={p.id} id={p.id} message={p.message} likesCount={p.likesCount}/>);
 
-    let newPostElement = React.createRef<HTMLTextAreaElement>();
+    const newPostElement = React.createRef<HTMLTextAreaElement>();
 
-    let addPost = () => {
+    const addPost = () => {
         if (newPostElement.current) {
-            props.addPostCallback(newPostElement.current.value)
+            props.dispatch(addPostAC(newPostElement.current.value))
             newPostElement.current.value = "";
         }
     }
 
-    let onPostChange = () => {
+    const onPostChange = () => {
         if (newPostElement.current) {
-            props.updateNewPostTextCallback(newPostElement.current.value)
+            props.dispatch(updateNewPostTextAC(newPostElement.current.value)) // ctrl + alt + V - создать переменную объекта
             newPostElement.current.value = "";
         }
     }

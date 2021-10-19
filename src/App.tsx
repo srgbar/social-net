@@ -7,7 +7,7 @@ import Profile from "./components/Profile/Profile";
 import {Route} from "react-router-dom";
 import {StoreType} from "./redux/state";
 
-type PropsType = {
+export type PropsType = {
     store: StoreType
 }
 
@@ -29,8 +29,7 @@ const App: React.FC<PropsType> = (props) => {
                        render={() => <Profile
                            posts={state.profilePage.posts}
                            newPostText={state.profilePage.newPostText}
-                           addPostCallback={props.store.addPost.bind(props.store)}
-                           updateNewPostTextCallback={props.store.updateNewPostText.bind(props.store)}
+                           dispatch={props.store.dispatch.bind(props.store)}
                        />}/>
             </div>
         </div>
