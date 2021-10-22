@@ -2,7 +2,8 @@ import React, {ChangeEvent} from "react";
 import s from "./Dialogs.module.css";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {DialogsPageType, DispatchType, sendMessageAC, updateNewMessageBodyAC} from "../../redux/state";
+import {DialogsPageType, DispatchType} from "../../redux/state";
+import {sendMessageAC, updateNewMessageBodyAC} from "../../redux/dialogs-reducer";
 
 
 const Dialogs = (props: DialogsPageType & DispatchType) => {
@@ -39,5 +40,5 @@ const Dialogs = (props: DialogsPageType & DispatchType) => {
     )
 }
 
-export default Dialogs
+export default Dialogs;
 
