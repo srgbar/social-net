@@ -1,8 +1,12 @@
-import {ActionsTypes, SidebarType} from "./state";
+const initialState = {};
 
-const sidebarReducer = (state: SidebarType, action: ActionsTypes) => {
+export type SidebarType = {}
+
+export type SidebarActionType = {
+    type: "SIDEBAR-ZAGLUSHKA"
+}
+
+export const sidebarReducer = (state: SidebarType = initialState, action: SidebarActionType): SidebarType => {
 
     return state;
 }
-
-export default sidebarReducer;

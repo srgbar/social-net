@@ -1,8 +1,8 @@
 import React from 'react';
 import s from './Post.module.css';
-import {PostsType} from "../../../../redux/state";
+import {PostsType} from "../../../../redux/profile-reducer";
 
-const Post = (props: PostsType) => {
+export const Post = (props: PostsType) => {
 
     return (
         <div className={s.posts}>
@@ -16,5 +16,3 @@ const Post = (props: PostsType) => {
         </div>
     )
 }
-
-export default Post;

@@ -1,58 +1,54 @@
-import profileReducer, {addPostAC, updateNewPostTextAC} from "./profile-reducer";
-import dialogsReducer, {sendMessageAC, updateNewMessageBodyAC} from "./dialogs-reducer";
-import sidebarReducer from "./sidebar-reducer";
+import {addPostAC, profileReducer, updateNewPostTextAC} from "./profile-reducer";
+import {dialogsReducer, sendMessageAC, updateNewMessageBodyAC} from "./dialogs-reducer";
+import {sidebarReducer} from "./sidebar-reducer";
 
-export type DialogsType = {
+type DialogsType = {
     id: number
     name: string
 }
-export type MessagesType = {
+type MessagesType = {
     id: number
     message: string
 }
-export type PostsType = {
+type PostsType = {
     id: number
     message: string
     likesCount: number
 }
 
-export type DialogsPageType = {
+type DialogsPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessagesType>
     newMessageBody: string
 }
-export type ProfilePageType = {
+type ProfilePageType = {
     posts: Array<PostsType>
     newPostText: string
 }
 
-export type SidebarType = {}
+type SidebarType = {}
 
-export type RootStateType = {
+type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
     sidebar: SidebarType
 }
 
-export type StoreType = {
+type StoreType = {
     _state: RootStateType
     _callSubscriber: () => void   // _onChange в Типизации соц сети
 
     subscribe: (observer: () => void) => void
     getState: () => RootStateType
 
-    dispatch: (action: ActionsTypes) => void
+    _dispatch: (action: ActionsTypes) => void
 }
 
-export type ActionsTypes =
+type ActionsTypes =
     ReturnType<typeof addPostAC> |
     ReturnType<typeof updateNewPostTextAC> |
     ReturnType<typeof sendMessageAC> |
     ReturnType<typeof updateNewMessageBodyAC>
-
-export type DispatchType = {
-    dispatch: (action: ActionsTypes) => void
-}
 
 const store: StoreType = {
     _state: {
@@ -94,15 +90,14 @@ const store: StoreType = {
     subscribe(observer: () => void) {
         this._callSubscriber = observer; // pattern observer
     },
-    dispatch(action) {
+    _dispatch(action: any) {
         this._state.profilePage = profileReducer(this._state.profilePage, action);
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
         this._state.sidebar = sidebarReducer(this._state.sidebar, action);
+
         this._callSubscriber();
     }
 }
-
-export default store;
 
 // @ts-ignore
 window.store = store;
