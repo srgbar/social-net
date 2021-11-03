@@ -19,7 +19,7 @@ type ActionsProfileType = AddPostActionType | UpdateNewPostTextActionType;
 
 export type InitialProfileStateType = typeof initialState
 
-const initialState: ProfilePageType = {
+const initialState = {
     posts: [
         {id: 1, message: "Hi, how are you?", likesCount: 12},
         {id: 2, message: "It\'s my first post", likesCount: 11},
@@ -32,7 +32,7 @@ const initialState: ProfilePageType = {
 export const profileReducer = (state: InitialProfileStateType = initialState, action: ActionsProfileType): InitialProfileStateType => {
     switch (action.type) {
         case "ADD-POST":
-            let newPost: PostsType = {
+            const newPost: PostsType = {
                 id: new Date().getTime(),
                 message: state.newPostText,
                 likesCount: 0
