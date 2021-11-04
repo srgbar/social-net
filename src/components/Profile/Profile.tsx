@@ -1,14 +1,12 @@
 import React from 'react';
-import {SuperMyPostContainer} from "./MyPosts/MyPostsContainer";
+import {MyPostContainer} from "./MyPosts/MyPostsContainer";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
-const Profile = () => {
+export const Profile = () => {
     return (
         <div>
             <ProfileInfo/>
-            <SuperMyPostContainer/>
+            <MyPostContainer/>
         </div>
     )
 }
-
-export default Profile;
