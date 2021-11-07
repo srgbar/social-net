@@ -3,6 +3,10 @@
     height: 100px;
 }
 
+.selectedPage {
+    font-weight: bold;
+}
+
 .users {
     padding: 20px;
 }

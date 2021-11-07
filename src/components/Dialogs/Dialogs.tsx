@@ -3,6 +3,8 @@ import s from "./Dialogs.module.css";
 import {DialogsPropsType} from "./DialogsContainer";
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
+import netLogo from "../../assets/images/netLogo.jpg";
+
 
 export const Dialogs = (props: DialogsPropsType) => {
 
@@ -21,6 +23,10 @@ export const Dialogs = (props: DialogsPropsType) => {
     }
 
     return (
+        <div>
+        <div>
+            <img src={netLogo}/>
+        </div>
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
                 {dialogsElements}
@@ -30,13 +36,17 @@ export const Dialogs = (props: DialogsPropsType) => {
                 <div>
                     <div><textarea value={newMessageBody}
                                    onChange={onNewMessageChange}
-                                   placeholder="Enter your message"/>
+                                   placeholder="Enter your message"
+                                   style={{background: "#eaefc3"}}
+                    />
                     </div>
                     <div>
-                        <button onClick={onSendMessageClick}>Send</button>
+                        <button onClick={onSendMessageClick} style={{background: "#eaefc3"}}>Send</button>
                     </div>
                 </div>
             </div>
         </div>
+        </div>
+
     )
 }

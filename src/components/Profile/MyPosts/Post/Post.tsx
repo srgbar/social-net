@@ -1,13 +1,14 @@
 import React from 'react';
 import s from './Post.module.css';
 import {PostsType} from "../../../../redux/profile-reducer";
+import postAvatar from "../../../../assets/images/postAvatar.png";
 
 export const Post = (props: PostsType) => {
 
     return (
         <div className={s.posts}>
             <div className={s.item}>
-                <img src="http://sun9-39.userapi.com/c5136/g25744499/a_e413dc6f.jpg"/>
+                <img src={postAvatar}/>
                 {props.message}
                 <div>
                     <span>Like </span>{props.likesCount}

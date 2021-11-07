@@ -23,10 +23,12 @@ export const MyPosts = (props: MyPostsPropsType) => {
             <div>
                 <div><textarea
                     value={props.newPostText}
-                    onChange={onPostChange}/>
+                    onChange={onPostChange}
+                    style={{background: "#eaefc3"}}
+                />
                 </div>
                 <div>
-                    <button onClick={onAddPost}>Add post</button>
+                    <button onClick={onAddPost} style={{background: "#eaefc3"}}  >Add post</button>
                 </div>
             </div>
             <div className={s.posts}>
