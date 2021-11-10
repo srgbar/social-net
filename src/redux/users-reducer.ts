@@ -1,3 +1,5 @@
+import {stat} from "fs";
+
 export type UsersType = {
     id: number
     photos: {
@@ -37,6 +39,10 @@ export type setUsersTotalCountActionType = {
     type: "SET-TOTAL-USERS-COUNT"
     count: number
 }
+export type toggleIsFetchingActionType = {
+    type: "TOGGLE-IS-FETCHING"
+    isFetching: boolean
+}
 
 type ActionsUsersType =
     FollowActionType
@@ -44,6 +50,7 @@ type ActionsUsersType =
     | setUsersActionType
     | setCurrentPageActionType
     | setUsersTotalCountActionType
+    | toggleIsFetchingActionType
 
 export type InitialUsersStateType = typeof initialState
 
@@ -51,7 +58,8 @@ const initialState = {
     users: [] as Array<UsersType>,
     pageSize: 5,
     totalUsersCount: 0,
-    currentPage: 2
+    currentPage: 1,
+    isFetching: true
 }
 
 export const usersReducer = (state: InitialUsersStateType = initialState, action: ActionsUsersType): InitialUsersStateType => {
@@ -85,19 +93,24 @@ export const usersReducer = (state: InitialUsersStateType = initialState, action
         case "SET-TOTAL-USERS-COUNT": {
             return {...state, totalUsersCount: action.count}
         }
+        case "TOGGLE-IS-FETCHING": {
+            return {...state, isFetching: action.isFetching}
+        }
         default:
             return state;
     }
 }
 
-export const followAC = (userId: number): FollowActionType => (
+export const follow = (userId: number): FollowActionType => (
     {type: "FOLLOW", userId} as const)
-export const unfollowAC = (userId: number): UnfollowActionType => (
+export const unfollow = (userId: number): UnfollowActionType => (
     {type: "UNFOLLOW", userId} as const)
-export const setUsersAC = (users: Array<UsersType>): setUsersActionType => (
+export const setUsers = (users: Array<UsersType>): setUsersActionType => (
     {type: "SET-USERS", users} as const)
-export const setCurrentPageAC = (currentPage: number): setCurrentPageActionType => (
+export const setCurrentPage = (currentPage: number): setCurrentPageActionType => (
     {type: "SET-CURRENT-PAGE", currentPage} as const)
-export const setUsersTotalCountAC = (totalUsersCount: number): setUsersTotalCountActionType => (
+export const setTotalUsersCount = (totalUsersCount: number): setUsersTotalCountActionType => (
     {type: "SET-TOTAL-USERS-COUNT", count: totalUsersCount} as const)
+export const toggleIsFetching = (isFetching: boolean): toggleIsFetchingActionType => (
+    {type: "TOGGLE-IS-FETCHING", isFetching} as const)
 
