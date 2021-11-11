@@ -1,5 +1,3 @@
-import {stat} from "fs";
-
 export type UsersType = {
     id: number
     photos: {
@@ -11,13 +9,6 @@ export type UsersType = {
     status: string
     location: { city: string, country: string }
 }
-
-// type UsersPageType = {
-//     users: Array<UsersType>
-//     pageSize: number
-//     totalUsersCount: number
-//     currentPage: number
-// }
 
 export type FollowActionType = {
     type: "FOLLOW"

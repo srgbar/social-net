@@ -15,6 +15,16 @@ import axios from "axios";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
 
+export type UsersPropsType = {
+    users: Array<UsersType>
+    pageSize: number,
+    totalUsersCount: number
+    currentPage: number
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
+    onPageChanged: (pageNumber: number) => void
+}
+
 type MapStatePropsType = {
     users: Array<UsersType>
     pageSize: number,
@@ -29,16 +39,6 @@ type MapDispatchPropsType = {
     setCurrentPage: (pageNumber: number) => void
     setTotalUsersCount: (totalCount: number) => void
     toggleIsFetching: (isFetching: boolean) => void
-}
-
-export type UsersPropsType = {
-    users: Array<UsersType>
-    pageSize: number,
-    totalUsersCount: number
-    currentPage: number
-    follow: (userId: number) => void
-    unfollow: (userId: number) => void
-    onPageChanged: (pageNumber: number) => void
 }
 
 export type UsersContainerPropsType = MapStatePropsType & MapDispatchPropsType
