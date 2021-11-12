@@ -1,9 +1,9 @@
 import React from 'react';
 import {MyPostContainer} from "./MyPosts/MyPostsContainer";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {ProfilePropsType} from "./ProfileInfo/ProfileContainer";
+import {MapStatePropsType} from "./ProfileInfo/ProfileContainer";
 
-export const Profile = (props: ProfilePropsType) => {
+export const Profile = (props: MapStatePropsType) => {
     return (
         <div>
             <ProfileInfo profile={props.profile}/>

@@ -3,6 +3,19 @@ export type ProfilesType = {
         small: string,
         large: string
     }
+    lookingForAJobDescription: string
+    lookingForAJob: boolean
+    fullName: string
+    contacts: {
+        github: string
+        vk: string
+        facebook: string
+        instagram: string
+        twitter: string
+        website: string
+        youtube: string
+        mainLink: string
+    }
 }
 
 export type PostsType = {
@@ -25,7 +38,7 @@ export type UpdateNewPostTextActionType = {
 }
 export type setUserProfileActionType = {
     type: "SET-USER-PROFILE"
-    profile: Array<ProfilesType>
+    profile: ProfilesType
 }
 type ActionsProfileType = AddPostActionType | UpdateNewPostTextActionType | setUserProfileActionType;
 
@@ -35,11 +48,28 @@ const initialState = {
     posts: [
         {id: 1, message: "Hi, how are you?", likesCount: 12},
         {id: 2, message: "It\'s my first post", likesCount: 11},
-        {id: 3, message: "Blabla", likesCount: 3},
-        {id: 4, message: "Dada", likesCount: 100500}
+        {id: 3, message: "Awesome!", likesCount: 5}
     ] as Array<PostsType>,
     newPostText: "it-kamasutra.com",
-    profile: [] as Array<ProfilesType>
+    profile: {
+        photos: {
+            small: "https://c.tenor.com/SwqQl1FnAGgAAAAi/owl-blinking.gif",
+            large: ""
+        },
+        lookingForAJobDescription: "I am study to React JS Developer",
+        lookingForAJob: true,
+        fullName: "Sergey B.",
+        contacts: {
+            github: "",
+            vk: "",
+            facebook: "",
+            instagram: "https://www.instagram.com/",
+            twitter: "",
+            website: "",
+            youtube: "",
+            mainLink: ""
+        }
+    } as ProfilesType
 };
 
 export const profileReducer = (state: InitialProfileStateType = initialState, action: ActionsProfileType): InitialProfileStateType => {
@@ -68,7 +98,7 @@ export const profileReducer = (state: InitialProfileStateType = initialState, ac
 }
 
 export const addPostAC = (): AddPostActionType => ({type: "ADD-POST"} as const)
-export const setUserProfile = (profile: Array<ProfilesType>): setUserProfileActionType => ({
+export const setUserProfile = (profile: ProfilesType): setUserProfileActionType => ({
     type: "SET-USER-PROFILE",
     profile
 } as const)

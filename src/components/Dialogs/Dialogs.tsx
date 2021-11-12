@@ -24,29 +24,26 @@ export const Dialogs = (props: DialogsPropsType) => {
 
     return (
         <div>
-        <div>
-            <img src={netLogo}/>
-        </div>
-        <div className={s.dialogs}>
-            <div className={s.dialogsItems}>
-                {dialogsElements}
-            </div>
-            <div className={s.messages}>
-                <div>{messagesElements}</div>
-                <div>
-                    <div><textarea value={newMessageBody}
-                                   onChange={onNewMessageChange}
-                                   placeholder="Enter your message"
-                                   style={{background: "#eaefc3"}}
-                    />
-                    </div>
+            <div className={s.dialogs}>
+                <div className={s.dialogsItems}>
+                    {dialogsElements}
+                </div>
+                <div className={s.messages}>
+                    <div>{messagesElements}</div>
                     <div>
-                        <button onClick={onSendMessageClick} style={{background: "#eaefc3"}}>Send</button>
+                        <div><textarea value={newMessageBody}
+                                       onChange={onNewMessageChange}
+                                       placeholder="Enter your message"
+                                       style={{background: "#f5f6ea", borderRadius: 7}}
+                        />
+                        </div>
+                        <div>
+                            <button onClick={onSendMessageClick} style={{background: "#f5f6ea", borderRadius: 7}}>Send
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
-
     )
 }

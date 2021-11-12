@@ -1,24 +1,30 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
-import cub from "../../../assets/images/cub.jpg";
 import {Preloader} from "../../common/Preloader/Preloader";
-import {ProfilePropsType} from "./ProfileContainer";
+import {MapStatePropsType} from "./ProfileContainer";
 
-export const ProfileInfo = (props: ProfilePropsType) => {
+export const ProfileInfo = (props: MapStatePropsType) => {
 
     if (!props.profile) {
         return <Preloader/>
     }
-    debugger
+
     return (
         <div>
-            <div>
-                <img src={cub}/>
-            </div>
             <div className={s.descriptionBlock}>
-
-                {/*<img src={props.profile.photos.large} />*/}
-                ava + description
+                <div>
+                    <img src={props.profile.photos.small}/>
+                </div>
+                {/*ava + description*/}
+                <div style={{padding: 15}}>
+                    <ul>
+                        <li>{props.profile.fullName}</li>
+                        <li>{props.profile.lookingForAJobDescription}</li>
+                        <li>
+                            <a href={props.profile.contacts.instagram}><i>instagram</i></a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     )
