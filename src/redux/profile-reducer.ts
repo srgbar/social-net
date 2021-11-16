@@ -69,7 +69,7 @@ const initialState = {
             youtube: "",
             mainLink: ""
         }
-    } as ProfilesType
+    }
 };
 
 export const profileReducer = (state: InitialProfileStateType = initialState, action: ActionsProfileType): InitialProfileStateType => {
