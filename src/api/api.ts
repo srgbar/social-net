@@ -15,14 +15,20 @@ export const userAPI = {
                 return response.data;
             });
     },
-    followUsers(id = 20199) {
-        return instance.post(`follow/${id}`)
-            .then(response => {
-                return response.data;
-            });
+    follow(userId: number) {
+        return instance.post(`follow/${userId}`)
+            // .then(response => {
+            //     return response.data;
+            // });
     },
-    unFollowUsers(id = 20199) {
-        return instance.delete(`follow/${id}`)
+    unfollow(userId: number) {
+        return instance.delete(`follow/${userId}`)
+            // .then(response => {
+            //     return response.data;
+            // });
+    },
+    authSocNet() {
+        return instance.get(`auth/me`)
             .then(response => {
                 return response.data;
             });

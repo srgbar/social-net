@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
 import {Preloader} from "../../common/Preloader/Preloader";
-import {MapStatePropsType} from "./ProfileContainer";
+import {MapStatePropsType} from "../ProfileContainer";
 
 export const ProfileInfo = (props: MapStatePropsType) => {
 

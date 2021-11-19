@@ -1,3 +1,8 @@
+import {userAPI} from "../api/api";
+import {AppStateType} from "./redux-store";
+import {Dispatch} from "redux";
+import {ThunkAction} from "redux-thunk";
+
 export type UsersType = {
     id: number
     photos: {
@@ -34,6 +39,11 @@ export type toggleIsFetchingActionType = {
     type: "TOGGLE-IS-FETCHING"
     isFetching: boolean
 }
+export type toggleFollowingProgressActionType = {
+    type: "TOGGLE-IS-FOLLOWING-PROGRESS"
+    isFetching: boolean
+    // userId: number
+}
 
 type ActionsUsersType =
     FollowActionType
@@ -42,6 +52,7 @@ type ActionsUsersType =
     | setCurrentPageActionType
     | setUsersTotalCountActionType
     | toggleIsFetchingActionType
+    | toggleFollowingProgressActionType
 
 export type InitialUsersStateType = typeof initialState
 
@@ -50,7 +61,8 @@ const initialState = {
     pageSize: 30,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: true
+    isFetching: true,
+    followingInProgress: false // []
 }
 
 export const usersReducer = (state: InitialUsersStateType = initialState, action: ActionsUsersType): InitialUsersStateType => {
@@ -87,14 +99,24 @@ export const usersReducer = (state: InitialUsersStateType = initialState, action
         case "TOGGLE-IS-FETCHING": {
             return {...state, isFetching: action.isFetching}
         }
+        case "TOGGLE-IS-FOLLOWING-PROGRESS": {
+            //     return {
+            //         ..state,
+            //         followingInProgress: action.isFetching
+            //             ? [...state.followingInProgress, action.userId]
+            //             : state.followingInProgress.filter(id => id != action.userId)
+            //     }
+            // }
+            return {...state, followingInProgress: action.isFetching}
+        }
         default:
             return state;
     }
 }
 
-export const follow = (userId: number): FollowActionType => (
+export const followSuccess = (userId: number): FollowActionType => (
     {type: "FOLLOW", userId} as const)
-export const unfollow = (userId: number): UnfollowActionType => (
+export const unfollowSuccess = (userId: number): UnfollowActionType => (
     {type: "UNFOLLOW", userId} as const)
 export const setUsers = (users: Array<UsersType>): setUsersActionType => (
     {type: "SET-USERS", users} as const)
@@ -104,4 +126,45 @@ export const setTotalUsersCount = (totalUsersCount: number): setUsersTotalCountA
     {type: "SET-TOTAL-USERS-COUNT", count: totalUsersCount} as const)
 export const toggleIsFetching = (isFetching: boolean): toggleIsFetchingActionType => (
     {type: "TOGGLE-IS-FETCHING", isFetching} as const)
+export const toggleFollowingProgress = (isFetching: boolean, /*userId: number*/): toggleFollowingProgressActionType => (
+    {type: "TOGGLE-IS-FOLLOWING-PROGRESS", isFetching, /*userId*/} as const)
 
+
+export const getUsers = (currentPage: number, pageSize: number)
+    : ThunkAction<void, AppStateType, unknown, ActionsUsersType> => {
+    return dispatch => {
+        dispatch(toggleIsFetching(true));
+        userAPI.getUsers(currentPage, pageSize).then(data => {
+            dispatch(toggleIsFetching(false));
+            dispatch(setUsers(data.items));
+            dispatch(setTotalUsersCount(data.totalCount));
+        });
+    }
+}
+
+export const follow = (userId: number)
+    : ThunkAction<void, AppStateType, unknown, ActionsUsersType> => {
+    return dispatch => {
+        dispatch(toggleFollowingProgress(true));
+        userAPI.follow(userId).then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(followSuccess(userId));
+            }
+            dispatch(toggleFollowingProgress(false));
+        });
+    }
+}
+
+export const unfollow = (userId: number)
+    : ThunkAction<void, AppStateType, unknown, ActionsUsersType> => {
+    return dispatch => {
+        dispatch(toggleFollowingProgress(true));
+        userAPI.unfollow(userId)
+            .then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(unfollowSuccess(userId));
+            }
+            dispatch(toggleFollowingProgress(false));
+        });
+    }
+}
