@@ -3,7 +3,6 @@ import userPhoto from "../../assets/images/user.png";
 import React from "react";
 import {UsersPropsType} from "./UsersContainer";
 import {NavLink} from "react-router-dom";
-import {userAPI} from "../../api/api";
 
 export const Users = (props: UsersPropsType) => {
 
@@ -34,17 +33,11 @@ export const Users = (props: UsersPropsType) => {
                     </div>
                     <div>
                         {u.followed
-
                             ? <button disabled={props.followingInProgress/*.some(id => id === u.id)*/}
-                                      onClick={() => {
-                                          props.unfollow(u.id)
-                                      }}>
+                                      onClick={() => {props.unfollow(u.id)}}>
                                 Unfollow</button>
-
                             : <button disabled={props.followingInProgress/*.some(id => id === u.id)*/}
-                                      onClick={() => {
-                                          props.follow(u.id)
-                                      }}>
+                                      onClick={() => {props.follow(u.id)}}>
                                 Follow</button>
                         }
                     </div>
