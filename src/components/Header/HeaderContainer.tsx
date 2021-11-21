@@ -2,8 +2,7 @@ import React from 'react';
 import {Header} from "./Header";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
-import {DataType, setAuthUserData} from "../../redux/auth-reducer";
-import {userAPI} from "../../api/api";
+import {getAuthUserData} from "../../redux/auth-reducer";
 
 
 export type MapStatePropsType = {
@@ -11,7 +10,7 @@ export type MapStatePropsType = {
     login: string
 }
 type MapDispatchPropsType = {
-    setAuthUserData: (data: DataType) => void
+    getAuthUserData: () => void
 }
 
 export type HeaderContainerPropsType = MapStatePropsType & MapDispatchPropsType
@@ -19,13 +18,7 @@ export type HeaderContainerPropsType = MapStatePropsType & MapDispatchPropsType
 class HeaderContainer extends React.Component<HeaderContainerPropsType> {
 
     componentDidMount() {
-
-            userAPI.authSocNet().then(data => {
-                if (data.resultCode === 0) {
-                    // let {id, email, login} = response.data.data;
-                    this.props.setAuthUserData(data);
-                }
-            });
+           this.props.getAuthUserData();
     }
 
     render() {
@@ -40,4 +33,4 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     }
 }
 
-export default connect(mapStateToProps, {setAuthUserData})(HeaderContainer);
+export default connect(mapStateToProps, {getAuthUserData})(HeaderContainer);

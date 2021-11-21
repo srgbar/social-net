@@ -1,3 +1,7 @@
+import {ThunkAction} from "redux-thunk";
+import {AppStateType} from "./redux-store";
+import {authAPI} from "../api/api";
+
 export type DataType = {
     id: number
     email: string
@@ -44,4 +48,14 @@ export const authReducer = (state: InitialAuthStateType = initialState, action: 
 export const setAuthUserData = (data: DataType): setUsersDataActionType => (
     {type: "SET-USERS-DATA", data} as const)
 
-
+export const getAuthUserData = (): ThunkAction<void, AppStateType, unknown, ActionsUsersType> => {
+    return dispatch => {
+        authAPI.me()
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    // let {id, email, login} = response.data.data;
+                    dispatch(setAuthUserData(response.data));
+                }
+            });
+    }
+}

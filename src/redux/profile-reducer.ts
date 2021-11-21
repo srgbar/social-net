@@ -1,3 +1,7 @@
+import {ThunkAction} from "redux-thunk";
+import {AppStateType} from "./redux-store";
+import {userAPI} from "../api/api";
+
 export type ProfilesType = {
     photos: {
         small: string,
@@ -106,3 +110,12 @@ export const updateNewPostTextAC = (newText: string): UpdateNewPostTextActionTyp
     type: "UPDATE-NEW-POST-TEXT",
     newText
 } as const)
+
+export const getUserProfile = (userId: string): ThunkAction<void, AppStateType, unknown, ActionsProfileType> => {
+    return dispatch => {
+        userAPI.getProfile(userId).then(response => {
+            dispatch(setUserProfile(response.data));
+        });
+    }
+}
+
