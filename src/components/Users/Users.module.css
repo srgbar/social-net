@@ -12,6 +12,26 @@
 }
 
 .margins {
-    margin: 5px 5px 5px 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 15px;
+    padding: 15px;
+    border: solid #32a1ce;
+    max-width: 450px;
+    background-color: #e1faf4;
 }
+
+.photoAndButton {
+    margin: 5px;
+    padding: 10px;
+}
+
+.blockInfoUser {
+    border: dashed 3px #5fa6c4;
+    padding: 10px;
+    margin: 5px;
+}
+
 

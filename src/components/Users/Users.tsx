@@ -23,8 +23,8 @@ export const Users = (props: UsersPropsType) => {
             })}
         </div>
         {
-            props.users.map(u => <div key={u.id}>
-                <span className={s.margins}>
+            props.users.map(u => <div key={u.id} className={s.margins}>
+                <div className={s.photoAndButton}>
                     <div>
                         <NavLink to={"/profile/" + u.id}>
                         <img src={u.photos.small != null ? u.photos.small : userPhoto}
@@ -34,24 +34,28 @@ export const Users = (props: UsersPropsType) => {
                     <div>
                         {u.followed
                             ? <button disabled={props.followingInProgress/*.some(id => id === u.id)*/}
-                                      onClick={() => {props.unfollow(u.id)}}>
+                                      onClick={() => {props.unfollow(u.id)}}
+                                      style={{backgroundColor: "#ece1f5"}}
+                            >
                                 Unfollow</button>
                             : <button disabled={props.followingInProgress/*.some(id => id === u.id)*/}
-                                      onClick={() => {props.follow(u.id)}}>
+                                      onClick={() => {props.follow(u.id)}}
+                                      style={{backgroundColor: "#faf2ca"}}
+                            >
                                 Follow</button>
                         }
                     </div>
-                </span>
-                <span>
-                    <span>
+                </div>
+                <div className={s.blockInfoUser}>
+                    <div>
                         <div>{u.name}</div>
                         <div>{u.status}</div>
-                    </span>
-                    <span>
+                    </div>
+                    <div>
                         <div>{"u.location.country"}</div>
                         <div>{"u.location.city"}</div>
-                    </span>
-                </span>
+                    </div>
+                </div>
             </div>)
         }
     </div>

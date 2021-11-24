@@ -8,10 +8,10 @@ export type DataType = {
     login: string
 }
 
-type AuthType = {
-    data: DataType
-    isAuth: boolean
-}
+// type AuthType = {
+//     data: DataType
+//     isAuth: boolean
+// }
 
 export type setUsersDataActionType = {
     type: "SET-USERS-DATA"
