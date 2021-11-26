@@ -2,6 +2,7 @@ import React from 'react';
 import s from './ProfileInfo.module.css';
 import {Preloader} from "../../common/Preloader/Preloader";
 import {MapStatePropsType} from "../ProfileContainer";
+import ProfileStatus from "./ProfileStatus";
 
 export const ProfileInfo = (props: MapStatePropsType) => {
 
@@ -15,7 +16,7 @@ export const ProfileInfo = (props: MapStatePropsType) => {
                 <div>
                     <img src={props.profile.photos.small}/>
                 </div>
-                {/*ava + description*/}
+                <ProfileStatus status={"Hello, my friends"}/>
                 <div style={{padding: 15}}>
                     <ul>
                         <li>{props.profile.fullName}</li>

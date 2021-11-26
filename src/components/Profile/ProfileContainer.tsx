@@ -15,6 +15,7 @@ type PropsType = RouteComponentProps<PathParamsType> & ProfileContainerPropsType
 
 export type MapStatePropsType = {
     profile: ProfilesType
+    status?: string
 }
 
 type MapDispatchPropsType = {
@@ -28,9 +29,9 @@ class ProfileContainer extends React.Component<PropsType> {
 
     componentDidMount() {
         let userId = this.props.match.params.userId;
-        if (!userId) {
-            userId = "2"
-        }
+        // if (!userId) {
+        //     userId = "2"
+        // }
         this.props.getUserProfile(userId);
     }
 
@@ -48,5 +49,5 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
 export default compose<React.ComponentType>(
     connect(mapStateToProps, {getUserProfile}),
     withRouter,
-    withAuthRedirect)
+   /* withAuthRedirect*/)
 (ProfileContainer)
