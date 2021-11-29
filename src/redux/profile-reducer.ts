@@ -137,7 +137,6 @@ export const getUserProfile = (userId: string): ThunkAction<void, AppStateType, 
 export const getStatus = (userId: string): ThunkAction<void, AppStateType, unknown, ActionsProfileType> => {
     return dispatch => {
         profileAPI.getStatus(userId).then(response => {
-            debugger;
             dispatch(setStatus(response.data));
         });
     }

@@ -1,0 +1,8 @@
+.block {
+    padding: 25px;
+    margin: 20px;
+    border: solid #136e58;
+    max-width: 200px;
+    max-height: 200px;
+    background-color: #ccf6d6;
+}
