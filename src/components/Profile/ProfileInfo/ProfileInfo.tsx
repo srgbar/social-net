@@ -1,10 +1,10 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
 import {Preloader} from "../../common/Preloader/Preloader";
-import {MapStatePropsType} from "../ProfileContainer";
+import {StatusPropsType} from "../ProfileContainer";
 import ProfileStatus from "./ProfileStatus";
 
-export const ProfileInfo = (props: MapStatePropsType) => {
+export const ProfileInfo = (props: StatusPropsType) => {
 
     if (!props.profile) {
         return <Preloader/>
@@ -13,18 +13,25 @@ export const ProfileInfo = (props: MapStatePropsType) => {
     return (
         <div>
             <div className={s.descriptionBlock}>
-                <div>
-                    <img src={props.profile.photos.small}/>
+                <div className={s.groopOfNameAndStatus}>
+                    <div>
+                        {props.profile.fullName}
+                    </div>
+                    <div className={s.status}>
+                        <ProfileStatus profile={props.profile} status={props.status}
+                                       updateStatus={props.updateStatus}/>
+                    </div>
                 </div>
-                <ProfileStatus status={"Hello, my friends"}/>
-                <div style={{padding: 15}}>
-                    <ul>
-                        <li>{props.profile.fullName}</li>
-                        <li>{props.profile.lookingForAJobDescription}</li>
-                        <li>
-                            <a href={props.profile.contacts.instagram}><i>instagram</i></a>
-                        </li>
-                    </ul>
+                <div className={s.Photo}>
+                    <div>
+                        <img src={props.profile.photos.small}/>
+                    </div>
+                </div>
+                <div className={s.blockInfoUser}>
+                    <div><b>Job Description: </b> {props.profile.lookingForAJobDescription}</div>
+                    <div><b>Instagram: </b> <a
+                        href={props.profile.contacts.instagram}><i>{props.profile.contacts.instagram || ""}</i></a>
+                    </div>
                 </div>
             </div>
         </div>

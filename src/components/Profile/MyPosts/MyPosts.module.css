@@ -1,4 +1,14 @@
 .postsBlock {
+    padding: 20px;
+}
+
+.Z {
+    margin: 20px;
+}
+
+.groopOfInputAndButton {
+    padding: 10px;
+    display: flex;
     padding: 10px;
 }
 

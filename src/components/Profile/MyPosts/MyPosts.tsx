@@ -19,16 +19,16 @@ export const MyPosts = (props: MyPostsPropsType) => {
 
     return (
         <div className={s.postsBlock}>
-            <h3>My posts</h3>
-            <div>
+            <h3 className={s.Z}>My posts</h3>
+            <div className={s.groopOfInputAndButton}>
                 <div><textarea
                     value={props.newPostText}
                     onChange={onPostChange}
-                    style={{background: "#f5f6ea", borderRadius: 7}}
+                    style={{background: "#f5f6ea", borderRadius: 7, maxHeight: 20}}
                 />
                 </div>
                 <div>
-                    <button onClick={onAddPost} style={{background: "#f5f6ea", borderRadius: 7}}>Add post</button>
+                    <button onClick={onAddPost} style={{background: "#f5f6ea", borderRadius: 7, marginLeft: 10}}>Add post</button>
                 </div>
             </div>
             <div className={s.posts}>
