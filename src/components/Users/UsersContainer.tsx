@@ -1,7 +1,6 @@
 import React from 'react';
 import {AppStateType} from "../../redux/redux-store";
 import {connect} from "react-redux";
-import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
 import {
     follow,
@@ -13,6 +12,7 @@ import {
 } from "../../redux/users-reducer";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
+import Users from "./Users";
 
 export type UsersPropsType = {
     users: Array<UsersType>

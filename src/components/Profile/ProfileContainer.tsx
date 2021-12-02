@@ -3,15 +3,14 @@ import {getStatus, getUserProfile, ProfilesType, updateStatus} from "../../redux
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
-import {Profile} from "./Profile";
 import {compose} from "redux";
+import Profile from "./Profile";
 
 export type StatusPropsType = {
     profile: ProfilesType
     status: string
     updateStatus: (status: string) => void
 }
-
 
 type PathParamsType = {
     userId: string
@@ -22,13 +21,11 @@ type MapStatePropsType = {
     profile: ProfilesType
     status: string
 }
-
 type MapDispatchPropsType = {
     getUserProfile: (userId: string) => void
     getStatus: (userId: string) => void
     updateStatus: (status: string) => void
 }
-
 export type ProfileContainerPropsType = MapStatePropsType & MapDispatchPropsType
 
 

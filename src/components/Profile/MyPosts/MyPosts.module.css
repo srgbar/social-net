@@ -2,16 +2,29 @@
     padding: 20px;
 }
 
-.Z {
+.header {
     margin: 20px;
 }
 
 .groopOfInputAndButton {
-    padding: 10px;
     display: flex;
-    padding: 10px;
 }
 
 .posts {
     margin-top: 10px;
+}
+
+.textarea {
+    background: #f5f6ea;
+    border-radius: 10px;
+    height: 23px;
+    margin: 5px;
+}
+
+.button {
+    background: #f5f6ea;
+    border-radius: 10px;
+    height: 23px;
+    margin: 5px;
+    /*color: white;*/
 }

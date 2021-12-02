@@ -1,9 +1,9 @@
 import React from 'react';
 import {MyPostContainer} from "./MyPosts/MyPostsContainer";
-import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {StatusPropsType} from "./ProfileContainer";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
-export const Profile = (props: StatusPropsType) => {
+const Profile = (props: StatusPropsType) => {
     return (
         <div>
             <ProfileInfo profile={props.profile}
@@ -14,3 +14,5 @@ export const Profile = (props: StatusPropsType) => {
         </div>
     )
 }
+
+export default Profile;

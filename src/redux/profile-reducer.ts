@@ -28,17 +28,9 @@ export type PostsType = {
     likesCount: number
 }
 
-type ProfilePageType = {
-    posts: Array<PostsType>
-    newPostText: string
-}
-
 export type AddPostActionType = {
     type: "ADD-POST"
-}
-export type UpdateNewPostTextActionType = {
-    type: "UPDATE-NEW-POST-TEXT"
-    newText: string
+    newPostText: string
 }
 export type setUserProfileActionType = {
     type: "SET-USER-PROFILE"
@@ -48,8 +40,7 @@ export type setStatusActionType = {
     type: "SET-STATUS"
     status: string
 }
-type ActionsProfileType =
-    AddPostActionType | UpdateNewPostTextActionType | setUserProfileActionType | setStatusActionType;
+type ActionsProfileType = AddPostActionType | setUserProfileActionType | setStatusActionType;
 
 export type InitialProfileStateType = typeof initialState
 
@@ -59,7 +50,6 @@ const initialState = {
         {id: 2, message: "It\'s my first post", likesCount: 11},
         {id: 3, message: "Awesome!", likesCount: 5}
     ] as Array<PostsType>,
-    newPostText: "it-kamasutra.com",
     profile: {
         photos: {
             small: "https://c.tenor.com/SwqQl1FnAGgAAAAi/owl-blinking.gif",
@@ -72,33 +62,27 @@ const initialState = {
             github: "",
             vk: "",
             facebook: "",
-            instagram: "https://www.instagram.com/",
+            instagram: "",
             twitter: "",
             website: "",
             youtube: "",
             mainLink: ""
         }
     },
-    status: "Step by step",
+    status: "Hello Bye",
 };
 
-export const profileReducer = (state: InitialProfileStateType = initialState, action: ActionsProfileType): InitialProfileStateType => {
+const profileReducer = (state: InitialProfileStateType = initialState, action: ActionsProfileType): InitialProfileStateType => {
     switch (action.type) {
         case "ADD-POST":
             const newPost: PostsType = {
                 id: new Date().getTime(),
-                message: state.newPostText,
+                message: action.newPostText,
                 likesCount: 0
             }
             return {
                 ...state,
                 posts: [...state.posts, newPost],
-                newPostText: ""
-            }
-        case "UPDATE-NEW-POST-TEXT":
-            return {
-                ...state,
-                newPostText: action.newText
             }
         case "SET-STATUS":
             return {
@@ -112,20 +96,15 @@ export const profileReducer = (state: InitialProfileStateType = initialState, ac
     }
 }
 
-export const addPostAC = (): AddPostActionType => ({type: "ADD-POST"} as const)
+export const addPostAC = (newPostText: string): AddPostActionType =>
+    ({type: "ADD-POST", newPostText} as const)
 export const setUserProfile = (profile: ProfilesType): setUserProfileActionType => ({
-    type: "SET-USER-PROFILE",
-    profile
-} as const)
+    type: "SET-USER-PROFILE", profile} as const)
 export const setStatus = (status: string): setStatusActionType => ({
-    type: "SET-STATUS",
-    status
-} as const)
-export const updateNewPostTextAC = (newText: string): UpdateNewPostTextActionType => ({
-    type: "UPDATE-NEW-POST-TEXT",
-    newText
-} as const)
+    type: "SET-STATUS", status} as const)
 
+
+// Thunks
 export const getUserProfile = (userId: string): ThunkAction<void, AppStateType, unknown, ActionsProfileType> => {
     return dispatch => {
         userAPI.getProfile(userId).then(response => {
@@ -133,7 +112,6 @@ export const getUserProfile = (userId: string): ThunkAction<void, AppStateType, 
         });
     }
 }
-
 export const getStatus = (userId: string): ThunkAction<void, AppStateType, unknown, ActionsProfileType> => {
     return dispatch => {
         profileAPI.getStatus(userId).then(response => {
@@ -141,7 +119,6 @@ export const getStatus = (userId: string): ThunkAction<void, AppStateType, unkno
         });
     }
 }
-
 export const updateStatus = (status: string): ThunkAction<void, AppStateType, unknown, ActionsProfileType> => {
     return dispatch => {
         profileAPI.updateStatus(status).then(response => {
@@ -151,3 +128,4 @@ export const updateStatus = (status: string): ThunkAction<void, AppStateType, un
     }
 }
 
+export default profileReducer;

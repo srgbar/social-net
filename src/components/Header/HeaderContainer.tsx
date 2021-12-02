@@ -1,9 +1,9 @@
 import React from 'react';
-import {Header} from "./Header";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {getAuthUserData} from "../../redux/auth-reducer";
 import {compose} from "redux";
+import Header from "./Header";
 
 
 export type MapStatePropsType = {
@@ -33,8 +33,6 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
         login: state.auth.data.login
     }
 }
-
-// export default connect(mapStateToProps, {getAuthUserData})(HeaderContainer);
 
 export default compose<React.ComponentType>(
     connect(mapStateToProps, {getAuthUserData}))

@@ -20,3 +20,15 @@
 .messages .message {
     color: white;
 }
+
+.groopOfInputAndButton {
+    display: flex;
+    padding: 25px;
+}
+
+.textareaAndButton {
+    background: #f5f6ea;
+    border-radius: 10px;
+    height: 23px;
+    margin: 5px;
+}

@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
 import {Route} from "react-router-dom";
-import {Navbar} from "./components/Navbar/Navbar";
-import {Login} from "./components/Login/Login";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import Navbar from "./components/Navbar/Navbar";
+import Login from "./components/Login/Login";
 
 const App: React.FC = () => {
     return (

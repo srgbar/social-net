@@ -1,42 +1,50 @@
+import {Field, Form, Formik} from 'formik';
 import React from 'react';
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import s from './Login.module.css';
 
-type FormDataType = {
+type FormDataLoginType = {
     login: string
     password: string
     rememberMe: boolean
 }
 
-const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
-    return (
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field placeholder={"Login"} name={"login"} component={"input"}/>
-            </div>
-            <div>
-                <Field placeholder={"Password"} name={"password"} component={"input"}/>
-            </div>
-            <div>
-                <Field type={"checkbox"} name={"rememberMe"}  component={"input"}/> remember me
-            </div>
-            <div>
-                <button>Login</button>
-            </div>
-        </form>
-    )
-};
+const loginFormValidate = () => {
+    const errors = {}
+    return errors;
+}
 
-const LoginReduxForm = reduxForm<FormDataType>({form: "login"})(LoginForm)
-
-export const Login = () => {
-    const onSubmit = (formData: FormDataType) => {
-        console.log(formData);
+const Login = () => {
+    const submit = (values: FormDataLoginType, {setSubmitting}: {setSubmitting: (isSubmitting: boolean) => void}) => {
+        setSubmitting(false);
+        console.log(values)
     }
     return (
         <div className={s.block}>
             <h1>Login</h1>
-            <LoginReduxForm onSubmit={onSubmit}/>
+            <Formik
+                initialValues={{login: '', password: '', rememberMe: true}}
+                validate={loginFormValidate}
+                onSubmit={submit}
+            >
+                {({isSubmitting}) => (
+                    <Form>
+                        <div>
+                            <Field placeholder={"Login"} name={"login"} component={"input"}/>
+                        </div>
+                        <div>
+                            <Field placeholder={"Password"} name={"password"} component={"input"}/>
+                        </div>
+                        <div>
+                            <Field type={"checkbox"} name={"rememberMe"} component={"input"}/> remember me
+                        </div>
+                        <div>
+                            <button type="submit">Login</button>
+                        </div>
+                    </Form>
+                )}
+            </Formik>
         </div>
     )
-};
+}
+
+export default Login;

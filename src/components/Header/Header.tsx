@@ -4,7 +4,7 @@ import {NavLink} from 'react-router-dom';
 import {MapStatePropsType} from "./HeaderContainer";
 import logo from "../../assets/images/black-map.png"
 
-export const Header = (props: MapStatePropsType) => {
+const Header = (props: MapStatePropsType) => {
     return <header className={s.header}>
         {/*<img src={cub}/>*/}
         <img src={logo}/>
@@ -17,3 +17,5 @@ export const Header = (props: MapStatePropsType) => {
         </div>
     </header>
 }
+
+export default Header;

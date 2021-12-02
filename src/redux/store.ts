@@ -1,6 +1,5 @@
-import {addPostAC, profileReducer, updateNewPostTextAC} from "./profile-reducer";
-import {dialogsReducer, sendMessageAC, updateNewMessageBodyAC} from "./dialogs-reducer";
-import {sidebarReducer} from "./sidebar-reducer";
+import {addPostAC} from "./profile-reducer";
+import {sendMessageAC} from "./dialogs-reducer";
 
 type DialogsType = {
     id: number
@@ -44,11 +43,7 @@ type StoreType = {
     _dispatch: (action: ActionsTypes) => void
 }
 
-type ActionsTypes =
-    ReturnType<typeof addPostAC> |
-    ReturnType<typeof updateNewPostTextAC> |
-    ReturnType<typeof sendMessageAC> |
-    ReturnType<typeof updateNewMessageBodyAC>
+type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof sendMessageAC>
 
 // const store: StoreType = {
 //     _state: {

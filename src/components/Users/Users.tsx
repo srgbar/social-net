@@ -4,7 +4,7 @@ import React from "react";
 import {UsersPropsType} from "./UsersContainer";
 import {NavLink} from "react-router-dom";
 
-export const Users = (props: UsersPropsType) => {
+const Users = (props: UsersPropsType) => {
 
     const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
 
@@ -60,3 +60,5 @@ export const Users = (props: UsersPropsType) => {
         }
     </div>
 }
+
+export default Users;
