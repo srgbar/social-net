@@ -6,25 +6,65 @@
     margin: 20px;
 }
 
-.groopOfInputAndButton {
-    display: flex;
-}
-
 .posts {
     margin-top: 10px;
 }
 
-.textarea {
-    background: #f5f6ea;
-    border-radius: 10px;
-    height: 23px;
-    margin: 5px;
+.formik {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.input[type="text"] {
+    display: block;
+    width: 400px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 3px solid lightseagreen;
+    border-radius: 4px;
+}
+
+.inputError[type="text"] {
+    display: block;
+    width: 400px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 3px solid red;
+    border-radius: 4px;
 }
 
 .button {
-    background: #f5f6ea;
-    border-radius: 10px;
-    height: 23px;
-    margin: 5px;
-    /*color: white;*/
+    display: block;
+    width: 90px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 3px solid lightseagreen;
+    border-radius: 4px;
+    margin-left: 10px;
+}
+
+.buttonError {
+    display: block;
+    width: 90px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: black;
+    background-color: #efc7c5;
+    background-image: none;
+    /*border: #cb27aa;*/
+    border-radius: 4px;
+    margin-left: 10px;
 }

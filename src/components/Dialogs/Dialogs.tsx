@@ -4,6 +4,7 @@ import {DialogsPropsType, MapDispatchPropsType} from "./DialogsContainer";
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {Field, Form, Formik} from "formik";
+import {AddNewPostForm} from "../Profile/MyPosts/MyPosts";
 
 type FormDataMessageType = {
     newMessageBody: string
@@ -23,7 +24,10 @@ const Dialogs = (props: DialogsPropsType) => {
                 <div className={s.dialogsItems}>{dialogsElements}</div>
                 <div className={s.messages}>{messagesElements}</div>
             </div>
-            <AddMessageForm sendMessage={props.sendMessage}/>
+            <div className={s.formik}>
+                {/*<AddMessageForm sendMessage={props.sendMessage}/>*/}
+                <AddNewPostForm addPost={props.sendMessage}/>
+            </div>
         </div>
     )
 }

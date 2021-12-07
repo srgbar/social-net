@@ -28,32 +28,35 @@ const ProfileInfo = (props: StatusPropsType) => {
                     </div>
                 </div>
                 <div className={s.blockInfoUser}>
+                    <div><b>About me: </b> {props.profile.aboutMe}</div>
                     <div><b>Job Description: </b> {props.profile.lookingForAJobDescription}</div>
-                    <div><b>lookingForAJob: </b> {props.profile.lookingForAJob}</div>
-                    <div><b>Github: </b> <a
-                        href={props.profile.contacts.github}><i>{props.profile.contacts.github || ""}</i></a>
-                    </div>
-                    <div><b>VK: </b> <a
-                        href={props.profile.contacts.vk}><i>{props.profile.contacts.vk || ""}</i></a>
-                    </div>
-                    <div><b>Facebook: </b> <a
-                        href={props.profile.contacts.facebook}><i>{props.profile.contacts.facebook || ""}</i></a>
-                    </div>
-                    <div><b>Instagram: </b> <a
-                        href={props.profile.contacts.instagram}><i>{props.profile.contacts.instagram || ""}</i></a>
-                    </div>
-                    <div><b>Twitter: </b> <a
-                        href={props.profile.contacts.twitter}><i>{props.profile.contacts.twitter || ""}</i></a>
-                    </div><
-                    div><b>Website: </b> <a
-                        href={props.profile.contacts.website}><i>{props.profile.contacts.website || ""}</i></a>
-                    </div>
-                    <div><b>Youtube: </b> <a
-                        href={props.profile.contacts.youtube}><i>{props.profile.contacts.youtube || ""}</i></a>
-                    </div>
-                    <div><b>MainLink: </b> <a
-                        href={props.profile.contacts.mainLink}><i>{props.profile.contacts.mainLink || ""}</i></a>
-                    </div>
+                    <div><b>lookingForAJob: </b> {props.profile.lookingForAJob ? "yes" : "no"}</div>
+                    <ul style={{margin: 10, padding: 5}}><b>Contacts</b>:
+                        <li><b>github: </b> <a
+                            href={props.profile.contacts.github}><i>{props.profile.contacts.github || ""}</i></a>
+                        </li>
+                        <li><b>vk: </b> <a
+                            href={props.profile.contacts.vk}><i>{props.profile.contacts.vk || ""}</i></a>
+                        </li>
+                        <li><b>facebook: </b> <a
+                            href={props.profile.contacts.facebook}><i>{props.profile.contacts.facebook || ""}</i></a>
+                        </li>
+                        <li><b>instagram: </b> <a
+                            href={props.profile.contacts.instagram}><i>{props.profile.contacts.instagram || ""}</i></a>
+                        </li>
+                        <li><b>twitter: </b> <a
+                            href={props.profile.contacts.twitter}><i>{props.profile.contacts.twitter || ""}</i></a>
+                        </li>
+                        <li><b>website: </b> <a
+                            href={props.profile.contacts.website}><i>{props.profile.contacts.website || ""}</i></a>
+                        </li>
+                        <li><b>youtube: </b> <a
+                            href={props.profile.contacts.youtube}><i>{props.profile.contacts.youtube || ""}</i></a>
+                        </li>
+                        <li><b>mainLink: </b> <a
+                            href={props.profile.contacts.mainLink}><i>{props.profile.contacts.mainLink || ""}</i></a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>

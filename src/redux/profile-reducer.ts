@@ -9,6 +9,7 @@ export type ProfilesType = {
     }
     lookingForAJobDescription: string
     lookingForAJob: boolean
+    aboutMe: string
     fullName: string
     contacts: {
         github: string
@@ -56,7 +57,8 @@ const initialState = {
             large: ""
         },
         lookingForAJobDescription: "I am study to React JS Developer",
-        lookingForAJob: true,
+        lookingForAJob: false,
+        aboutMe: "",
         fullName: "Sergey B.",
         contacts: {
             github: "",
