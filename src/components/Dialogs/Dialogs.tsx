@@ -1,14 +1,10 @@
 import React from "react";
 import s from "./Dialogs.module.css";
-import {DialogsPropsType, MapDispatchPropsType} from "./DialogsContainer";
+import {DialogsPropsType} from "./DialogsContainer";
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {Field, Form, Formik} from "formik";
-import {AddNewPostForm} from "../Profile/MyPosts/MyPosts";
+import AddNewMessageForm from "../common/AddNewMessageForm/AddNewMessageForm";
 
-type FormDataMessageType = {
-    newMessageBody: string
-}
 
 const Dialogs = (props: DialogsPropsType) => {
 
@@ -16,7 +12,6 @@ const Dialogs = (props: DialogsPropsType) => {
 
     const dialogsElements = state.dialogs.map((d) => <DialogItem name={d.name} key={d.id} id={d.id}/>);
     const messagesElements = state.messages.map((m) => <Message message={m.message} key={m.id} id={m.id}/>);
-    // const newMessageBody = state.newMessageBody;
 
     return (
         <div>
@@ -25,39 +20,14 @@ const Dialogs = (props: DialogsPropsType) => {
                 <div className={s.messages}>{messagesElements}</div>
             </div>
             <div className={s.formik}>
-                {/*<AddMessageForm sendMessage={props.sendMessage}/>*/}
-                <AddNewPostForm addPost={props.sendMessage}/>
+                <AddNewMessageForm
+                    addPost={props.sendMessage}
+                    placeholder={"Enter your message"}
+                    titleOfButton={"Send"}
+                />
             </div>
         </div>
     )
 }
-
-const AddMessageForm = (props: MapDispatchPropsType) => {
-    const submit = (values: FormDataMessageType, {setSubmitting}: { setSubmitting: (isSubmitting: boolean) => void }) => {
-        setSubmitting(false);
-        props.sendMessage(values.newMessageBody)
-    }
-    return (
-        <div>
-            <Formik
-                initialValues={{newMessageBody: ''}}
-                onSubmit={submit}>
-                {({isSubmitting}) => (
-                    <Form>
-                        <div className={s.groopOfInputAndButton}>
-                            <Field name={"newMessageBody"}
-                                   placeholder={"Enter your message"}
-                                   component={"textarea"}
-                                   className={s.textareaAndButton}/>
-                            <button type="submit"
-                                    className={s.textareaAndButton}>Send
-                            </button>
-                        </div>
-                    </Form>
-                )}
-            </Formik>
-        </div>
-    );
-};
 
 export default Dialogs;

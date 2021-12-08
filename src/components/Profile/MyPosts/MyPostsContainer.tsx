@@ -8,8 +8,8 @@ import MyPosts from "./MyPosts";
 type MapStatePropsType = {
     posts: Array<PostsType>
 }
-export type MapDispatchPropsType = {
-    addPost: (newPostText: string) => void
+type MapDispatchPropsType = {
+    addPost: (newMessageText: string) => void
 }
 export type MyPostsPropsType = MapStatePropsType & MapDispatchPropsType
 
@@ -20,7 +20,7 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
 }
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
     return {
-        addPost: (newPostText) => {dispatch(addPostAC(newPostText))}
+        addPost: (newMessageText) => {dispatch(addPostAC(newMessageText))}
     }
 }
 

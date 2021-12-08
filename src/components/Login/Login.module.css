@@ -2,7 +2,29 @@
     padding: 25px;
     margin: 20px;
     border: solid #136e58;
+    border-radius: 4px;
     max-width: 200px;
-    max-height: 200px;
+    max-height: 400px;
     background-color: #ccf6d6;
+}
+
+.form {
+    border: 2px solid lightseagreen;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+.errorForm {
+    border: 2px solid red;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+.spanError {
+    color: red;
+}
+
+.button {
+    background-color: #b0efeb;
+    border-radius: 4px;
 }

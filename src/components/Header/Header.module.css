@@ -10,9 +10,15 @@
 
 .loginBlock {
     float: right;
-    margin: 15px;
+    margin: 10px;
 }
 
 .loginBlock a {
-    color: black;
+    /*color: black;*/
+}
+
+.button {
+    background-color: #b0efeb;
+    border-radius: 4px;
+    margin-left: 10px;
 }

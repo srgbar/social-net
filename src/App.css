@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Concert+One&family=Rakkas&display=swap');
+
 .app-wrapper {
     margin: 0 auto;
     display: grid;
@@ -9,6 +11,7 @@
     grid-template-rows: 80px 1fr;
     grid-template-columns: 2fr 10fr;
     /*grid-gap: 10px;*/
+    font-family: 'Concert One', cursive;
 }
 
 .app-wrapper-content {

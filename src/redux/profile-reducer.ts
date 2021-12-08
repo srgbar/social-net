@@ -31,7 +31,7 @@ export type PostsType = {
 
 export type AddPostActionType = {
     type: "ADD-POST"
-    newPostText: string
+    newMessageText: string
 }
 export type setUserProfileActionType = {
     type: "SET-USER-PROFILE"
@@ -79,7 +79,7 @@ const profileReducer = (state: InitialProfileStateType = initialState, action: A
         case "ADD-POST":
             const newPost: PostsType = {
                 id: new Date().getTime(),
-                message: action.newPostText,
+                message: action.newMessageText,
                 likesCount: 0
             }
             return {
@@ -98,8 +98,8 @@ const profileReducer = (state: InitialProfileStateType = initialState, action: A
     }
 }
 
-export const addPostAC = (newPostText: string): AddPostActionType =>
-    ({type: "ADD-POST", newPostText} as const)
+export const addPostAC = (newMessageText: string): AddPostActionType =>
+    ({type: "ADD-POST", newMessageText} as const)
 export const setUserProfile = (profile: ProfilesType): setUserProfileActionType => ({
     type: "SET-USER-PROFILE", profile} as const)
 export const setStatus = (status: string): setStatusActionType => ({
