@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './Login.module.css';
 import * as Yup from "yup";
-import {Field, Form, Formik} from 'formik';
+import {Field, Form, Formik, FormikHelpers} from 'formik';
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {login} from "../../redux/auth-reducer";
@@ -14,21 +14,19 @@ type FormDataLoginType = {
 }
 
 type LoginType = {
-    login: (email: string, password: string, rememberMe: boolean) => void
+    login: (email: string, password: string, rememberMe: boolean, setStatus: (status: string) => void) => void
     isAuth: boolean
 }
 
 const Login = (props: LoginType) => {
 
-    const submit = (values: FormDataLoginType) => {
+    const submit = (values: FormDataLoginType, {setStatus}: FormikHelpers<FormDataLoginType>) => {
         console.log(values);
-        props.login(values.email, values.password, values.rememberMe)
+        props.login(values.email, values.password, values.rememberMe, setStatus)
     }
 
     const validationSchema = Yup.object().shape({
         email: Yup.string()
-            // .min(2, 'Too short message!')
-            // .max(10, 'Too long message!')
             .required('Required'),
         password: Yup.string()
             .required('Required')
@@ -46,7 +44,7 @@ const Login = (props: LoginType) => {
                 validationSchema={validationSchema}
                 onSubmit={submit}
             >
-                {({errors, touched}) => (
+                {({status, errors, touched}) => (
                     <Form>
                         <div>
                             <Field name={"email"} type="input" placeholder={"Email"}
@@ -75,6 +73,9 @@ const Login = (props: LoginType) => {
                                     disabled={!!((errors.email && touched.email) || (errors.password && touched.password))}
                             >Login
                             </button>
+                        </div>
+                        <div className={s.errorServer}>
+                            {status && <div>{status}</div>}
                         </div>
                     </Form>
                 )}

@@ -28,3 +28,8 @@
     background-color: #b0efeb;
     border-radius: 4px;
 }
+
+.errorServer {
+    color: red;
+    margin-top: 5px;
+}

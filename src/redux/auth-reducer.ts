@@ -19,19 +19,17 @@ type ActionsUsersType = setUsersDataActionType
 export type InitialAuthStateType = typeof initialState
 
 const initialState = {
-    userId: "",
+    userId: "20199",
     email: "",
     login: "",
-    isAuth: false
+    isAuth: false,
+    message: ""
 }
 
 export const authReducer = (state: InitialAuthStateType = initialState, action: ActionsUsersType): InitialAuthStateType => {
     switch (action.type) {
         case "SET-USERS-DATA":
-            return {
-                ...state,
-                ...action.payload,
-            }
+            return {...state, ...action.payload}
         default:
             return state;
     }
@@ -51,12 +49,15 @@ export const getAuthUserData = (): ThunkAction<void, AppStateType, unknown, Acti
             });
     }
 }
-export const login = (email: string, password: string, rememberMe: boolean): ThunkAction<void, AppStateType, unknown, ActionsUsersType> => {
+
+export const login = (email: string, password: string, rememberMe: boolean, setStatus: (status: string) => void): ThunkAction<void, AppStateType, unknown, ActionsUsersType> => {
     return dispatch => {
         authAPI.login(email, password, rememberMe)
             .then(response => {
                 if (response.data.resultCode === 0) {
                     dispatch(getAuthUserData());
+                } else {
+                    setStatus(response.data.messages[0])
                 }
             });
     }

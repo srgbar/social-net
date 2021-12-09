@@ -53,13 +53,14 @@ const initialState = {
     ] as Array<PostsType>,
     profile: {
         photos: {
-            small: "https://c.tenor.com/SwqQl1FnAGgAAAAi/owl-blinking.gif",
+            // small: "https://c.tenor.com/SwqQl1FnAGgAAAAi/owl-blinking.gif",
+            small: "",
             large: ""
         },
-        lookingForAJobDescription: "I am study to React JS Developer",
+        lookingForAJobDescription: "",
         lookingForAJob: false,
         aboutMe: "",
-        fullName: "Sergey B.",
+        fullName: "",
         contacts: {
             github: "",
             vk: "",
