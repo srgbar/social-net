@@ -72,7 +72,7 @@ const initialState = {
             mainLink: ""
         }
     },
-    status: "Hello Bye",
+    status: "",
 };
 
 const profileReducer = (state: InitialProfileStateType = initialState, action: ActionsProfileType): InitialProfileStateType => {
@@ -108,14 +108,14 @@ export const setStatus = (status: string): setStatusActionType => ({
 
 
 // Thunks
-export const getUserProfile = (userId: string): ThunkAction<void, AppStateType, unknown, ActionsProfileType> => {
+export const getUserProfile = (userId: number): ThunkAction<void, AppStateType, unknown, ActionsProfileType> => {
     return dispatch => {
         userAPI.getProfile(userId).then(response => {
             dispatch(setUserProfile(response.data));
         });
     }
 }
-export const getStatus = (userId: string): ThunkAction<void, AppStateType, unknown, ActionsProfileType> => {
+export const getStatus = (userId: number): ThunkAction<void, AppStateType, unknown, ActionsProfileType> => {
     return dispatch => {
         profileAPI.getStatus(userId).then(response => {
             dispatch(setStatus(response.data));

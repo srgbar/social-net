@@ -1,37 +1,87 @@
-.userPhoto {
-    width: 100px;
-    height: 100px;
+.usersPage {
+    height: 100%;
+    background-color: #f1f5f8;
+    margin: 5px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .selectedPage {
     font-weight: bold;
 }
 
-.users {
-    padding: 20px;
-}
-
-.margins {
+.container{
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: center;
+    justify-content: space-between;
+}
+
+.users {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     margin: 15px;
     padding: 15px;
     border: solid #32a1ce;
-    max-width: 430px;
+    align-items: center;
+    /*max-width: 900px;*/
     background-color: #e1faf4;
 }
 
-.photoAndButton {
-    margin: 5px;
-    padding: 10px;
+.user {
+    height: 250px;
+    width: 200px;
+    background-color: white;
+    margin: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    border: solid #32a1ce;
+    padding: 5px;
+    /*max-width: 200px;*/
+}
+
+.userAvatar img{
+    width: 90px;
+    height: 90px;
+    border: 2px solid #f1f5f8;
+    border-radius: 10%;
 }
 
 .blockInfoUser {
-    border: dashed 3px #5fa6c4;
-    padding: 10px;
-    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    /*border: dashed 3px #5fa6c4;*/
+    /*padding: 10px;*/
+    /*margin: 5px;*/
 }
 
+.name {
+    font-weight: bold;
+    text-align: center;
+}
 
+.status {
+    text-align: center;
+    margin: 5px;
+    /*max-width: fit-content;*/
+    /*font-style: italic;*/
+    font-family: 'Yatra One', cursive;
+    /*max-width: 10px;*/
+    /*max-height: 10px;*/
+}
+
+.location {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 10px;
+}

@@ -30,7 +30,7 @@ const ProfileInfo = (props: StatusPropsType) => {
                 <div className={s.blockInfoUser}>
                     <div><b>About me: </b> {props.profile.aboutMe}</div>
                     <div><b>Job Description: </b> {props.profile.lookingForAJobDescription}</div>
-                    <div><b>lookingForAJob: </b> {props.profile.lookingForAJob ? "yes" : "no"}</div>
+                    <div><b>looking a job: </b> {props.profile.lookingForAJob ? "Open to work" : "Busy"}</div>
                     <ul style={{margin: 10, padding: 5}}><b>Contacts</b>:
                         <li><b>github: </b> <a
                             href={props.profile.contacts.github}><i>{props.profile.contacts.github || ""}</i></a>

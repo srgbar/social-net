@@ -22,9 +22,9 @@ const AddNewMessageForm = (props: AddNewMessageFormType) => {
 
     const validationSchema = Yup.object().shape({
         newMessageText: Yup.string()
-            .min(2, 'Too short message!')
-            .max(15, 'Too long message!')
-            .required('Required')
+            // .min(2, 'Too short message!')
+            .max(100, 'Maximum length is 100 symbols!')
+            .required('Field is required')
     });
 
     return (

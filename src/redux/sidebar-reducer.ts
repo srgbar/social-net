@@ -6,7 +6,9 @@ export type SidebarActionType = {
     type: "SIDEBAR-ZAGLUSHKA"
 }
 
-export const sidebarReducer = (state: SidebarType = initialState, action: SidebarActionType): SidebarType => {
+const sidebarReducer = (state: SidebarType = initialState, action: SidebarActionType): SidebarType => {
 
     return state;
 }
+
+export default sidebarReducer;

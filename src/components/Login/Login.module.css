@@ -1,23 +1,35 @@
-.block {
-    padding: 25px;
-    margin: 20px;
-    border: solid #136e58;
-    border-radius: 4px;
-    max-width: 200px;
-    max-height: 400px;
-    background-color: #ccf6d6;
+.text {
+    height: 100%;
+    background-color: #f1f5f8;
+    margin: 5px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: #a9ded1;
+    text-align: center;
+}
+
+s.block {
+    display: flex;
+    flex-direction: column;
+}
+
+.field {
+    display: flex;
+    justify-content: flex-end;
+    width: 250px;
+    margin: 5px;
 }
 
 .form {
     border: 2px solid lightseagreen;
     border-radius: 4px;
-    margin-bottom: 5px;
 }
 
 .errorForm {
     border: 2px solid red;
     border-radius: 4px;
-    margin-bottom: 5px;
 }
 
 .spanError {

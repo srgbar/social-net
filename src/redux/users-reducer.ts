@@ -61,10 +61,10 @@ const initialState = {
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: true,
-    followingInProgress: false // []
+    followingInProgress: [] as Array<number>
 }
 
-export const usersReducer = (state: InitialUsersStateType = initialState, action: ActionsUsersType): InitialUsersStateType => {
+const usersReducer = (state: InitialUsersStateType = initialState, action: ActionsUsersType): InitialUsersStateType => {
     switch (action.type) {
         case "FOLLOW":
             return {
@@ -98,16 +98,13 @@ export const usersReducer = (state: InitialUsersStateType = initialState, action
         case "TOGGLE-IS-FETCHING": {
             return {...state, isFetching: action.isFetching}
         }
-        case "TOGGLE-IS-FOLLOWING-PROGRESS": {
-            //     return {
-            //         ..state,
-            //         followingInProgress: action.isFetching
-            //             ? [...state.followingInProgress, action.userId]
-            //             : state.followingInProgress.filter(id => id != action.userId)
-            //     }
-            // }
-            return {...state, followingInProgress: action.isFetching}
-        }
+        case "TOGGLE-IS-FOLLOWING-PROGRESS":
+                return {
+                    ...state,
+                    followingInProgress: action.isFetching
+                        ? [...state.followingInProgress, action.userId]
+                        : state.followingInProgress.filter(id => id != action.userId)
+                }
         default:
             return state;
     }
@@ -169,3 +166,5 @@ export const unfollow = (userId: number)
             });
     }
 }
+
+export default usersReducer;

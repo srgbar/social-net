@@ -1,10 +1,11 @@
 import {applyMiddleware, combineReducers, createStore, Store} from "redux";
 import profileReducer from "./profile-reducer";
 import dialogsReducer from "./dialogs-reducer";
-import {sidebarReducer} from "./sidebar-reducer";
-import {usersReducer} from "./users-reducer";
-import {authReducer} from "./auth-reducer";
+import sidebarReducer from "./sidebar-reducer";
+import authReducer from "./auth-reducer";
+import usersReducer from "./users-reducer";
 import thunkMiddleware from "redux-thunk";
+import appReducer from "./app-reducer";
 
 
 // определить автоматически тип всего объекта состояния
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
     sidebar: sidebarReducer,
     usersPage: usersReducer,
     auth: authReducer,
+    app: appReducer
 })
 
 // непосредственно создаём store
