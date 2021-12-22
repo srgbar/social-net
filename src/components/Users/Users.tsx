@@ -47,18 +47,19 @@ const Users = (props: UsersPropsType) => {
                         {u.followed
                             ? <button disabled={props.followingInProgress.some(id => id === u.id)}
                                       onClick={() => {
+                                          debugger
                                           props.unfollow(u.id)
                                       }}
-                                      style={{backgroundColor: "#ece1f5"}}
+                                      className={s.buttonFollow}
                             >
-                                Unfollow</button>
+                                unfollow</button>
                             : <button disabled={props.followingInProgress.some(id => id === u.id)}
                                       onClick={() => {
                                           props.follow(u.id)
                                       }}
-                                      style={{backgroundColor: "#faf2ca"}}
+                                      className={s.buttonUnfollow}
                             >
-                                Follow</button>
+                                follow</button>
                         }
                     </div>
                 </div>)

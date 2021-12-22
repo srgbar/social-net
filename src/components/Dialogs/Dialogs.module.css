@@ -1,12 +1,16 @@
 .dialogs {
-    display: grid;
-    grid-template-columns: 2fr 10fr;
+    display: flex;
+    height: 80vh;
+    flex-direction: column;
+    justify-content: flex-start;
+    /*grid-template-columns: 2fr 10fr;*/
     padding: 20px;
 }
 
 .dialogsItems {
     padding: 10px;
     color: white;
+    /*max-widht: 50px;*/
 }
 
 .dialogsItems .active {
@@ -14,6 +18,7 @@
 }
 
 .messages {
+    /*max-widht: 100px;*/
     padding: 10px;
 }
 

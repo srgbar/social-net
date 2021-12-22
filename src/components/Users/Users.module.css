@@ -10,9 +10,10 @@
 
 .selectedPage {
     font-weight: bold;
+    color: blueviolet;
 }
 
-.container{
+.container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -46,7 +47,7 @@
     /*max-width: 200px;*/
 }
 
-.userAvatar img{
+.userAvatar img {
     width: 90px;
     height: 90px;
     border: 2px solid #f1f5f8;
@@ -84,4 +85,16 @@
     align-items: center;
     text-align: center;
     margin: 10px;
+}
+
+.buttonFollow {
+    background-color: #ece1f5;
+    border: 2px solid;
+    border-radius: 5px;
+}
+
+.buttonUnfollow {
+    background-color: #faf2ca;
+    border: 2px solid;
+    border-radius: 5px;
 }

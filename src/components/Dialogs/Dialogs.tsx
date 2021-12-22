@@ -14,10 +14,10 @@ const Dialogs = (props: DialogsPropsType) => {
     const messagesElements = state.messages.map((m) => <Message message={m.message} key={m.id} id={m.id}/>);
 
     return (
-        <div>
-            <div className={s.dialogs}>
-                <div className={s.dialogsItems}>{dialogsElements}</div>
-                <div className={s.messages}>{messagesElements}</div>
+        <div className={s.dialogs}>
+            <div>
+                <span className={s.dialogsItems}>{dialogsElements}</span>
+                <span className={s.messages}>{messagesElements}</span>
             </div>
             <div className={s.formik}>
                 <AddNewMessageForm
