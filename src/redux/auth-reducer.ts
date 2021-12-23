@@ -51,7 +51,6 @@ export const getAuthUserDataTC = (): ThunkAction<void, AppStateType, unknown, Ac
         return authAPI.me()
             .then(response => {
                 if (response.data.resultCode === 0) {
-                    debugger
                     let {id, email, login} = response.data.data;
                     dispatch(setAuthUserDataAC(id, email, login));
                     dispatch(setIsAuth(true));
