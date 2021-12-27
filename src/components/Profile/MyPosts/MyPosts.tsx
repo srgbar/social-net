@@ -5,10 +5,12 @@ import {Post} from "./Post/Post";
 import AddNewMessageForm from "../../common/AddNewMessageForm/AddNewMessageForm";
 
 
-const MyPosts = (props: MyPostsPropsType) => {
+const MyPosts = React.memo<MyPostsPropsType>(props => {
 
     const postsElements =
-        props.posts.map((p) => <Post key={p.id} id={p.id} message={p.message} likesCount={p.likesCount}/>);
+        [...props.posts]
+            .reverse()
+            .map((p) => <Post key={p.id} id={p.id} message={p.message} likesCount={p.likesCount}/>);
 
     return (
         <div className={s.postsBlock}>
@@ -22,6 +24,6 @@ const MyPosts = (props: MyPostsPropsType) => {
             </div>
             <div className={s.posts}>{postsElements}</div>
         </div>)
-}
+})
 
 export default MyPosts;

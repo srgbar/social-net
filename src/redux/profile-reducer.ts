@@ -41,7 +41,11 @@ export type setStatusActionType = {
     type: "SET-STATUS"
     status: string
 }
-type ActionsProfileType = AddPostActionType | setUserProfileActionType | setStatusActionType;
+export type deletePostActionType = {
+    type: "DELETE-POST"
+    postId: number
+}
+type ActionsProfileType = AddPostActionType | setUserProfileActionType | setStatusActionType | deletePostActionType;
 
 export type InitialProfileStateType = typeof initialState
 
@@ -94,6 +98,8 @@ const profileReducer = (state: InitialProfileStateType = initialState, action: A
             }
         case "SET-USER-PROFILE":
             return {...state, profile: action.profile}
+        case "DELETE-POST":
+            return {...state, posts: state.posts.filter(p => p.id !== action.postId)}
         default:
             return state;
     }
@@ -102,9 +108,14 @@ const profileReducer = (state: InitialProfileStateType = initialState, action: A
 export const addPostAC = (newMessageText: string): AddPostActionType =>
     ({type: "ADD-POST", newMessageText} as const)
 export const setUserProfile = (profile: ProfilesType): setUserProfileActionType => ({
-    type: "SET-USER-PROFILE", profile} as const)
+    type: "SET-USER-PROFILE", profile
+} as const)
 export const setStatus = (status: string): setStatusActionType => ({
-    type: "SET-STATUS", status} as const)
+    type: "SET-STATUS", status
+} as const)
+export const deletePostAC = (postId: number): deletePostActionType => ({
+    type: "DELETE-POST", postId
+} as const)
 
 
 // Thunks
@@ -126,7 +137,7 @@ export const updateStatus = (status: string): ThunkAction<void, AppStateType, un
     return dispatch => {
         profileAPI.updateStatus(status).then(response => {
             if (response.data.resultCode === 0)
-            dispatch(setStatus(status));
+                dispatch(setStatus(status));
         });
     }
 }
