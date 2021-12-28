@@ -15,9 +15,9 @@ const Dialogs = (props: DialogsPropsType) => {
 
     return (
         <div className={s.dialogs}>
-            <div>
-                <span className={s.dialogsItems}>{dialogsElements}</span>
-                <span className={s.messages}>{messagesElements}</span>
+            <div className={s.block}>
+                <div className={s.dialogsItems}>{dialogsElements}</div>
+                <div className={s.messages}>{messagesElements}</div>
             </div>
             <div className={s.formik}>
                 <AddNewMessageForm

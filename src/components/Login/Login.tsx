@@ -1,7 +1,7 @@
-import React from 'react';
-import s from './Login.module.css';
+import React from "react";
+import s from "./Login.module.css";
 import * as Yup from "yup";
-import {Field, Form, Formik, FormikHelpers} from 'formik';
+import {Field, Form, Formik, FormikHelpers} from "formik";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {loginTC} from "../../redux/auth-reducer";

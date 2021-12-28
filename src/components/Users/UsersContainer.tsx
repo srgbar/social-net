@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {AppStateType} from "../../redux/redux-store";
 import {connect} from "react-redux";
 import {Preloader} from "../common/Preloader/Preloader";
@@ -51,7 +51,7 @@ type MapDispatchPropsType = {
 
 export type UsersContainerPropsType = MapStatePropsType & MapDispatchPropsType
 
-class UsersContainer extends React.Component<UsersContainerPropsType> {
+class UsersContainer extends React.PureComponent<UsersContainerPropsType> {
 
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize);

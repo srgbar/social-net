@@ -3,8 +3,11 @@
     height: 80vh;
     flex-direction: column;
     justify-content: flex-start;
-    /*grid-template-columns: 2fr 10fr;*/
     padding: 20px;
+}
+
+.block {
+    display: flex;
 }
 
 .dialogsItems {

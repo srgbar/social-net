@@ -8,11 +8,6 @@
     align-items: center;
 }
 
-.selectedPage {
-    font-weight: bold;
-    color: blueviolet;
-}
-
 .container {
     display: flex;
     flex-wrap: wrap;
@@ -72,11 +67,9 @@
 .status {
     text-align: center;
     margin: 5px;
-    /*max-width: fit-content;*/
-    /*font-style: italic;*/
+    font-style: italic;
     font-family: 'Yatra One', cursive;
-    /*max-width: 10px;*/
-    /*max-height: 10px;*/
+    color: cornflowerblue;
 }
 
 .location {

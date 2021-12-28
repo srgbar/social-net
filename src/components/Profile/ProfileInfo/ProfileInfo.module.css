@@ -7,8 +7,9 @@
     margin: 15px;
     padding: 15px;
     border: solid #32a1ce;
-    max-width: 500px;
-    max-height: 600px;
+    border-radius: 10px;
+    max-width: 140vh;
+    /*max-height: 800px;*/
     background-color: #e1faf4;
     /*text-align: center;*/
 }
@@ -19,21 +20,35 @@
     text-align: center;
 }
 
+.fullName {
+    color: chocolate;
+}
+
 .status {
     font-weight: normal;
     font-size: 15px;
+    /*font-style: italic;*/
+    color: cornflowerblue;
 }
 
-.Photo {
+.blockPhotoAndInfoUser {
+    display: flex;
+    justify-content: space-around;
     margin: 20px;
-    padding: 15px;
+}
+
+.Photo img {
     /*border: 2mm dashed rgb(157, 234, 207);*/
-    max-height: 150px;
-    max-width: 150px;
+    /*border: solid 3px #5fa6c4;*/
+    max-height: 300px;
+    max-width: 300px;
+    border-radius: 5%;
 }
 
 .blockInfoUser {
-    border: dashed 3px #5fa6c4;
+    border: solid 3px #5fa6c4;
+    border-radius: 10px;
+    background-color: white;
     padding: 10px;
-    /*margin: 5px;*/
+    margin-left: 15px;
 }

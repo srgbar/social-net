@@ -12,7 +12,7 @@ export type DialogsPageType = {
 }
 
 export type SendMessageActionType = {
-    type: "SEND-MESSAGE"
+    type: "DIALOGS-PAGE/SEND-MESSAGE"
     newMessageBody: string
 }
 
@@ -24,21 +24,20 @@ const initialState = {
     dialogs: [
         {id: 1, name: "Dimych"},
         {id: 2, name: "Andrew"},
-        {id: 3, name: "Sveta"},
-        {id: 4, name: "Sasha"},
-        {id: 5, name: "Viktor"},
-        {id: 6, name: "Valera"}
+        {id: 3, name: "Pasha"},
+        {id: 4, name: "Olga"}
     ] as Array<DialogsType>,
     messages: [
-        {id: 1, message: "Hi"},
-        {id: 2, message: "How is your it-kamasutra?"},
-        {id: 3, message: "Yo"},
+        {id: 1, message: "Hello, my friend!"},
+        {id: 2, message: "Have you seen the new Spider-Man yet?"},
+        {id: 3, message: "What will you do during the winter holidays? Come with us to the Khibiny! Will be cool!"},
+        {id: 4, message: "How are you learning Javascript?"},
     ] as Array<MessagesType>,
 }
 
 const dialogsReducer = (state: InitialDialogsStateType = initialState, action: ActionsDialogsType): InitialDialogsStateType => {
     switch (action.type) {
-        case "SEND-MESSAGE":
+        case "DIALOGS-PAGE/SEND-MESSAGE":
             let body = action.newMessageBody;
             return {
                 ...state,
@@ -49,7 +48,9 @@ const dialogsReducer = (state: InitialDialogsStateType = initialState, action: A
     }
 }
 
-export const sendMessageAC = (newMessageBody: string): SendMessageActionType => (
-    {type: "SEND-MESSAGE", newMessageBody} as const)
-
 export default dialogsReducer;
+
+export const sendMessageAC = (newMessageBody: string): SendMessageActionType => (
+    {type: "DIALOGS-PAGE/SEND-MESSAGE", newMessageBody} as const)
+
+
