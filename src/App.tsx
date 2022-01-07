@@ -1,17 +1,17 @@
-import React from 'react';
-import './App.css';
-import {Route, withRouter} from "react-router-dom";
+import React from "react";
+import "./App.css";
+import {BrowserRouter, Route, withRouter} from "react-router-dom";
+import HeaderContainer from "./components/Header/HeaderContainer";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import UsersContainer from "./components/Users/UsersContainer";
-import HeaderContainer from "./components/Header/HeaderContainer";
-import Navbar from "./components/Navbar/Navbar";
 import LoginPage from "./components/Login/Login";
-import {connect} from "react-redux";
+import Navbar from "./components/Navbar/Navbar";
+import {connect, Provider} from "react-redux";
 import {compose} from "redux";
 import {initializedAppTC} from "./redux/app-reducer";
 import {Preloader} from "./components/common/Preloader/Preloader";
-import {AppStateType} from "./redux/redux-store";
+import store, {AppStateType} from "./redux/redux-store";
 
 
 export type MapStatePropsType = {
@@ -63,7 +63,16 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     }
 }
 
-export default compose<React.ComponentType>(
+const AppContainer = compose<React.ComponentType>(
     withRouter,
-    connect(mapStateToProps, {initializedAppTC})
-)(App);
+    connect(mapStateToProps, {initializedAppTC}))(App);
+
+const SamuraiJSApp = () => {
+    return <BrowserRouter>
+        <Provider store={store}>
+            <AppContainer/>
+        </Provider>
+    </BrowserRouter>
+}
+
+export default SamuraiJSApp;

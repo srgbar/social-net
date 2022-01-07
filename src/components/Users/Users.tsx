@@ -13,12 +13,12 @@ const Users = (props: UsersPropsType) => {
                    pageSize={props.pageSize}
         />
         <div className={s.users}>
-            {props.users.map(u => <User key={u.id}
-                                        users={props.users}
-                                        followingInProgress={props.followingInProgress}
-                                        follow={props.follow}
-                                        unfollow={props.unfollow}
-            />)
+            {
+                props.users.map(u => <User key={u.id}
+                                           users={u}
+                                           followingInProgress={props.followingInProgress}
+                                           follow={props.follow}
+                                           unfollow={props.unfollow}/>)
             }
         </div>
     </div>
