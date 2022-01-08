@@ -12,3 +12,10 @@
 .item a.activeLink {
     color: gold;
 }
+
+.item a:hover {
+    background-color: #2c7a71;
+    color: gold;
+    border: 1px solid #07be92;
+    border-radius: 5px;
+}

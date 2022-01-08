@@ -1,8 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
 import s from "./Paginator.module.css";
 
 type PaginatorPropsType = {
-    totalUsersCount: number
+    totalItemsCount: number
     pageSize: number
     onPageChanged: (pageNumber: number) => void
     currentPage: number
@@ -10,19 +10,39 @@ type PaginatorPropsType = {
 
 const Paginator = (props: PaginatorPropsType) => {
 
-    const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+    const pagesCount = Math.ceil(props.totalItemsCount / props.pageSize);
     const pages = [];
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
     }
 
-    return <div>
-        {pages.map(p => {
-            return <span className={props.currentPage === p ? s.selectedPage : ""}
-                         onClick={(e) => {
-                             props.onPageChanged(p);
-                         }}>{p + " "}</span>
-        })}
+    const portionSize = 20;
+    const portionCount = Math.ceil((pagesCount / portionSize));
+    const [portionNumber, setPortionNumber] = useState<number>(1);
+    const leftPortionPageNumber = (portionNumber - 1) * portionSize + 1;
+    const rightPortionPageNumber = portionNumber * portionSize;
+
+    return <div className={s.paginator}>
+        {portionNumber > 1 &&
+        <button className={s.button}
+                onClick={() => {
+            setPortionNumber(portionNumber - 1)
+        }}>{`<`}</button>}
+
+        {pages
+            .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
+            .map(p => {
+                return <span className={ props.currentPage === p ? s.selectedPage : ""}
+                             onClick={(e) => {
+                                 props.onPageChanged(p);
+                             }}>{p}</span>
+            })}
+
+        {portionCount > portionNumber &&
+        <button className={s.button}
+                onClick={() => {
+            setPortionNumber(portionNumber + 1)
+        }}>{`>`}</button>}
     </div>
 }
 

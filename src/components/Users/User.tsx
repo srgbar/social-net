@@ -24,9 +24,7 @@ const User = (props: UserPropsType) => {
                 <div className={s.blockInfoUser}>
                     <div>
                         <div className={s.name}>{props.users.name}</div>
-                        <div className={s.status}>
-                            <div>{props.users.status}</div>
-                        </div>
+                        <div className={s.status}>{props.users.status !== null ? props.users.status : "I have not status"}</div>
                     </div>
                     {/*<div>
                             <div>{"u.location.country"}</div>
