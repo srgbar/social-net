@@ -29,8 +29,8 @@ const initialState = {
     ] as Array<DialogsType>,
     messages: [
         {id: 1, message: "Hello, my friend!"},
-        {id: 2, message: "Have you seen the new Spider-Man yet?"},
-        {id: 3, message: "What will you do during the winter holidays? Come with us to the Khibiny! Will be cool!"},
+        {id: 2, message: `Have you seen the new "Spider-Man: No Way Home" yet?`},
+        {id: 3, message: "What will you do during the winter holidays? Come with us to the Altai! Will be cool!"},
         {id: 4, message: "How are you learning Javascript?"},
     ] as Array<MessagesType>,
 }

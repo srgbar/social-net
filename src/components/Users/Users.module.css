@@ -70,6 +70,7 @@
     font-style: italic;
     font-family: 'Yatra One', cursive;
     color: cornflowerblue;
+    max-width: 150px;
 
     display: -webkit-box;
     -webkit-line-clamp: 3;

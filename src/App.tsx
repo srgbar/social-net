@@ -2,27 +2,29 @@ import React from "react";
 import "./App.css";
 import {BrowserRouter, Route, withRouter} from "react-router-dom";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import ProfileContainer from "./components/Profile/ProfileContainer";
 import UsersContainer from "./components/Users/UsersContainer";
-import LoginPage from "./components/Login/Login";
 import Navbar from "./components/Navbar/Navbar";
 import {connect, Provider} from "react-redux";
 import {compose} from "redux";
 import {initializedAppTC} from "./redux/app-reducer";
 import {Preloader} from "./components/common/Preloader/Preloader";
 import store, {AppStateType} from "./redux/redux-store";
+import {withSuspense} from "./hoc/withSuspense";
 
 
 export type MapStatePropsType = {
     initialized: boolean
 }
-
 type MapDispatchPropsType = {
     initializedAppTC: () => void
 }
-
 export type AppPropsType = MapStatePropsType & MapDispatchPropsType
+
+
+const DialogsContainer = React.lazy(() => import("./components/Dialogs/DialogsContainer"));
+const ProfileContainer = React.lazy(() => import("./components/Profile/ProfileContainer"));
+const LoginPage = React.lazy(() => import("./components/Login/Login"));
+
 
 class App extends React.Component<AppPropsType> {
 
@@ -41,16 +43,13 @@ class App extends React.Component<AppPropsType> {
                 <Navbar/>
                 <div className="app-wrapper-content">
                     <Route path="/dialogs"
-                           render={() => <DialogsContainer/>}/>
-
+                           component={withSuspense(DialogsContainer)}/>
                     <Route path="/profile/:userId?"
-                           render={() => <ProfileContainer/>}/>
-
+                           component={withSuspense(ProfileContainer)}/>
                     <Route path="/users"
                            render={() => <UsersContainer/>}/>
-
                     <Route path="/login"
-                           render={() => <LoginPage/>}/>
+                           component={withSuspense(LoginPage)}/>
                 </div>
             </div>
         )
