@@ -37,7 +37,12 @@
     margin: 20px;
 }
 
-.Photo img {
+.photo {
+    display: flex;
+    align-items: flex-start;
+}
+
+.photo img {
     /*border: 2mm dashed rgb(157, 234, 207);*/
     /*border: solid 3px #5fa6c4;*/
     max-height: 300px;
@@ -51,4 +56,14 @@
     background-color: white;
     padding: 10px;
     margin-left: 15px;
+}
+
+.photo input[type="file"] {
+    display: none;
+}
+
+.photo .buttonLoad {
+    width: 25px;
+    height: 25px;
+    margin-left: 10px;
 }

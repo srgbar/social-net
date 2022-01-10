@@ -7,11 +7,6 @@ import AddNewMessageForm from "../../common/AddNewMessageForm/AddNewMessageForm"
 
 const MyPosts = React.memo<MyPostsPropsType>(props => {
 
-    const postsElements =
-        [...props.posts]
-            .reverse()
-            .map((p) => <Post key={p.id} id={p.id} message={p.message} likesCount={p.likesCount}/>);
-
     return (
         <div className={s.postsBlock}>
             <h3 className={s.header}>My posts</h3>
@@ -21,8 +16,10 @@ const MyPosts = React.memo<MyPostsPropsType>(props => {
                     placeholder={"Your message"}
                     titleOfButton={"Add post"}
                 />
+                <Post posts={props.posts}
+                      smallImage={props.smallImage}
+                />
             </div>
-            <div className={s.posts}>{postsElements}</div>
         </div>)
 })
 

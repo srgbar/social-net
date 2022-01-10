@@ -1,5 +1,11 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
-import {StatusPropsType} from "../ProfileContainer";
+import {ProfilesType} from "../../../redux/profile-reducer";
+
+export type StatusPropsType = {
+    profile: ProfilesType
+    status: string
+    updateStatus: (status: string) => void
+}
 
 const ProfileStatusWithHooks = (props: StatusPropsType) => {
 

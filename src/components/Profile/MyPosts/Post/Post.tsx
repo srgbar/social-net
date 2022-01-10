@@ -3,17 +3,30 @@ import s from './Post.module.css';
 import {PostsType} from "../../../../redux/profile-reducer";
 import postAvatar from "../../../../assets/images/postAvatar.png";
 
-export const Post = (props: PostsType) => {
+type PostPropsType = {
+    posts: Array<PostsType>
+    smallImage: string | null
+}
+
+export const Post = (props: PostPropsType) => {
+
+    const postsElements =
+        [...props.posts]
+            .reverse()
+            .map(p => <div key={p.id}>
+                    <div className={s.item}>
+                        <img src={props.smallImage ? props.smallImage : postAvatar}/>
+                        {p.message}
+                        <div>
+                            <span>Like </span>{p.likesCount}
+                        </div>
+                    </div>
+                </div>
+            );
 
     return (
         <div className={s.posts}>
-            <div className={s.item}>
-                <img src={postAvatar}/>
-                {props.message}
-                <div>
-                    <span>Like </span>{props.likesCount}
-                </div>
-            </div>
+            {postsElements}
         </div>
-    )
+    );
 }

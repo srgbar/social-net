@@ -1,5 +1,5 @@
 import React, {ChangeEvent} from 'react';
-import {StatusPropsType} from "../ProfileContainer";
+import {StatusPropsType} from "./ProfileStatusWithHooks";
 
 class ProfileStatus extends React.Component<StatusPropsType> {
     state = {

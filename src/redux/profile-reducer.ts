@@ -45,7 +45,15 @@ export type deletePostActionType = {
     type: "PROFILE-PAGE/DELETE-POST"
     postId: number
 }
-type ActionsProfileType = AddPostActionType | setUserProfileActionType | setStatusActionType | deletePostActionType;
+export type savePhotoActionType = {
+    type: "PROFILE-PAGE/SAVE-PHOTO-SUCCESS"
+    photo: string
+}
+type ActionsProfileType = AddPostActionType
+    | setUserProfileActionType
+    | setStatusActionType
+    | deletePostActionType
+    | savePhotoActionType;
 
 export type InitialProfileStateType = typeof initialState
 
@@ -99,6 +107,18 @@ const profileReducer = (state: InitialProfileStateType = initialState, action: A
             return {...state, profile: action.profile}
         case "PROFILE-PAGE/DELETE-POST":
             return {...state, posts: state.posts.filter(p => p.id !== action.postId)}
+        case "PROFILE-PAGE/SAVE-PHOTO-SUCCESS":
+            return {
+                ...state,
+                profile: {
+                    ...state.profile,
+                    photos: {
+                        ...state.profile.photos,
+                        small: action.photo,
+                        large: action.photo
+                    }
+                }
+            }
         default:
             return state;
     }
@@ -116,6 +136,9 @@ export const setStatusAC = (status: string): setStatusActionType => ({
 } as const)
 export const deletePostAC = (postId: number): deletePostActionType => ({
     type: "PROFILE-PAGE/DELETE-POST", postId
+} as const)
+export const savePhotoSuccessAC = (photo: string): savePhotoActionType => ({
+    type: "PROFILE-PAGE/SAVE-PHOTO-SUCCESS", photo
 } as const)
 
 
@@ -140,3 +163,12 @@ export const updateStatusTC = (status: string): ThunkAction<void, AppStateType, 
             dispatch(setStatusAC(status));
     }
 }
+
+export const savePhotoTC = (file: Blob): ThunkAction<void, AppStateType, unknown, ActionsProfileType> => {
+    return async dispatch => {
+        const response = await profileAPI.savePhoto(file)
+        if (response.data.resultCode === 0)
+            dispatch(savePhotoSuccessAC(response.data.data.photos.large));
+    }
+}
+

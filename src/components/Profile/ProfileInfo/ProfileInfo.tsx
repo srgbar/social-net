@@ -1,14 +1,30 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import s from "./ProfileInfo.module.css";
 import {Preloader} from "../../common/Preloader/Preloader";
-import {StatusPropsType} from "../ProfileContainer";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import userPhoto from "../../../assets/images/user.png";
+import {ProfilesType} from "../../../redux/profile-reducer";
+import {faFileImage} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-const ProfileInfo = (props: StatusPropsType) => {
+type ProfileInfoPropsType = {
+    profile: ProfilesType
+    status: string
+    updateStatus: (status: string) => void
+    isOwner: boolean
+    savePhoto: (file: Blob) => void
+}
+
+const ProfileInfo = (props: ProfileInfoPropsType) => {
 
     if (!props.profile) {
         return <Preloader/>
+    }
+
+    const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files) {
+            props.savePhoto(e.target.files[0]);
+        }
     }
 
     return (
@@ -24,10 +40,15 @@ const ProfileInfo = (props: StatusPropsType) => {
                     </div>
                 </div>
                 <div className={s.blockPhotoAndInfoUser}>
-                    <div className={s.Photo}>
-                        <div>
-                            <img src={props.profile.photos.large != null ? props.profile.photos.large : userPhoto}/>
-                        </div>
+                    <div className={s.photo}>
+                        <img src={props.profile.photos.large != null ? props.profile.photos.large : userPhoto}/>
+                        {props.isOwner
+                            ? <label>
+                                <FontAwesomeIcon icon={faFileImage} className={s.buttonLoad}/>
+                                <input type="file" onChange={onMainPhotoSelected}/>
+                            </label>
+                            : ""
+                        }
                     </div>
                     <div className={s.blockInfoUser}>
                         <div><b>About me: </b> {props.profile.aboutMe}</div>
