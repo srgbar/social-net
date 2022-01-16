@@ -21,7 +21,7 @@ type LoginType = {
 const LoginPage = (props: LoginType) => {
 
     const submit = (values: FormDataLoginType, {setStatus}: FormikHelpers<FormDataLoginType>) => {
-        console.log(values);
+        console.log(setStatus);
         props.loginTC(values.email, values.password, values.rememberMe, setStatus)
     }
 

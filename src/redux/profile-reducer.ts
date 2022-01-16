@@ -1,6 +1,18 @@
-import {ThunkAction} from "redux-thunk";
+import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {AppStateType} from "./redux-store";
 import {profileAPI, userAPI} from "../api/api";
+import {FormProfileDataType} from "../components/Profile/ProfileInfo/ProfileDataForm";
+
+export type ContactsType = {
+    github: string | null,
+    vk: string | null,
+    facebook: string | null,
+    instagram: string | null,
+    twitter: string | null,
+    website: string | null,
+    youtube: string | null,
+    mainLink: string | null
+}
 
 export type ProfilesType = {
     photos: {
@@ -11,16 +23,7 @@ export type ProfilesType = {
     lookingForAJob: boolean
     aboutMe: string
     fullName: string
-    contacts: {
-        github: string
-        vk: string
-        facebook: string
-        instagram: string
-        twitter: string
-        website: string
-        youtube: string
-        mainLink: string
-    }
+    contacts: ContactsType
 }
 
 export type PostsType = {
@@ -171,4 +174,39 @@ export const savePhotoTC = (file: Blob): ThunkAction<void, AppStateType, unknown
             dispatch(savePhotoSuccessAC(response.data.data.photos.large));
     }
 }
+
+// export const changeProfileDataTC = (profile: FormProfileDataType,
+//                                     getState: () => AppStateType,
+//                                     setStatus: (status: string) => void)
+//     : ThunkAction<void, AppStateType, unknown, ActionsProfileType> => {
+//     const userId = getState().auth.data.userId;
+//     return async dispatch => {
+//         debugger
+//         const response = await profileAPI.changeProfileData(profile)
+//         if (response.data.resultCode === 0) {
+//             dispatch(getUserProfileTC(userId))
+//         } else {
+//             setStatus(response.data.messages[0])
+//         }
+//     }
+// }
+
+
+export const changeProfileDataTC = (profile: FormProfileDataType,
+setStatus: (status: string) => void)
+    : ThunkAction<void, AppStateType, unknown, ActionsProfileType> => {
+    return (dispatch: ThunkDispatch<AppStateType, unknown, ActionsProfileType>, getState: () => AppStateType) => {
+        const userId = getState().auth.data.userId
+        profileAPI.changeProfileData(profile)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(getUserProfileTC(userId))
+                } else if (data.resultCode === 1) {
+                    const error = data.messages[0]
+                    setStatus(error)
+                }
+            })
+    }
+}
+
 

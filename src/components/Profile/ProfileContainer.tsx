@@ -1,11 +1,19 @@
 import React from 'react';
-import {getStatusTC, getUserProfileTC, ProfilesType, savePhotoTC, updateStatusTC} from "../../redux/profile-reducer";
+import {
+    changeProfileDataTC,
+    getStatusTC,
+    getUserProfileTC,
+    ProfilesType,
+    savePhotoTC,
+    updateStatusTC
+} from "../../redux/profile-reducer";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {compose} from "redux";
 import Profile from "./Profile";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {FormProfileDataType} from "./ProfileInfo/ProfileDataForm";
 
 type PathParamsType = {
     userId: string
@@ -24,6 +32,7 @@ type MapDispatchPropsType = {
     getStatusTC: (userId: number) => void
     updateStatusTC: (status: string) => void
     savePhotoTC: (file: Blob) => void
+    changeProfileDataTC: (profile: FormProfileDataType) => void
 }
 export type ProfileContainerPropsType = MapStatePropsType & MapDispatchPropsType
 
@@ -31,7 +40,6 @@ export type ProfileContainerPropsType = MapStatePropsType & MapDispatchPropsType
 class ProfileContainer extends React.Component<PropsType> {
 
     refreshProfile() {
-        debugger
         let userId = Number(this.props.match.params.userId);
         if (!userId) {
             userId = this.props.authorizedUserId;
@@ -60,6 +68,7 @@ class ProfileContainer extends React.Component<PropsType> {
                      updateStatusTC={this.props.updateStatusTC}
                      isOwner={!this.props.match.params.userId}
                      savePhotoTC={this.props.savePhotoTC}
+                     changeProfileDataTC={this.props.changeProfileDataTC}
             />
         )
     }
@@ -80,5 +89,6 @@ export default compose<React.ComponentType>(
             getUserProfileTC,
             getStatusTC,
             updateStatusTC,
-            savePhotoTC
+            savePhotoTC,
+            changeProfileDataTC
         }), withRouter, withAuthRedirect)(ProfileContainer)

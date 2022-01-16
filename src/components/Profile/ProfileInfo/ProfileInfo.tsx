@@ -1,11 +1,12 @@
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, useCallback, useState} from "react";
 import s from "./ProfileInfo.module.css";
 import {Preloader} from "../../common/Preloader/Preloader";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import userPhoto from "../../../assets/images/user.png";
-import {ProfilesType} from "../../../redux/profile-reducer";
+import {ContactsType, ProfilesType} from "../../../redux/profile-reducer";
 import {faFileImage} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import ProfileDataForm, {FormProfileDataType} from "./ProfileDataForm";
 
 type ProfileInfoPropsType = {
     profile: ProfilesType
@@ -13,12 +14,22 @@ type ProfileInfoPropsType = {
     updateStatus: (status: string) => void
     isOwner: boolean
     savePhoto: (file: Blob) => void
+    changeProfileData: (profile: FormProfileDataType) => void
 }
 
 const ProfileInfo = (props: ProfileInfoPropsType) => {
 
+    const [editMode, setEditMode] = useState(false);
+
     if (!props.profile) {
         return <Preloader/>
+    }
+
+    const onActivateEditMode = () => {
+        setEditMode(true)
+    }
+    const deactivateEditMode = () => {
+        setEditMode(false)
     }
 
     const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
@@ -50,37 +61,17 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                             : ""
                         }
                     </div>
-                    <div className={s.blockInfoUser}>
-                        <div><b>About me: </b> {props.profile.aboutMe}</div>
-                        <div><b>Job Description: </b> {props.profile.lookingForAJobDescription}</div>
-                        <div><b>looking a job: </b> {props.profile.lookingForAJob ? "Open to work" : "Busy"}</div>
-                        <ul style={{margin: 10, padding: 5}}><b>Contacts</b>:
-                            <li><b>github: </b> <a
-                                href={props.profile.contacts.github}><i>{props.profile.contacts.github || ""}</i></a>
-                            </li>
-                            <li><b>vk: </b> <a
-                                href={props.profile.contacts.vk}><i>{props.profile.contacts.vk || ""}</i></a>
-                            </li>
-                            <li><b>facebook: </b> <a
-                                href={props.profile.contacts.facebook}><i>{props.profile.contacts.facebook || ""}</i></a>
-                            </li>
-                            <li><b>instagram: </b> <a
-                                href={props.profile.contacts.instagram}><i>{props.profile.contacts.instagram || ""}</i></a>
-                            </li>
-                            <li><b>twitter: </b> <a
-                                href={props.profile.contacts.twitter}><i>{props.profile.contacts.twitter || ""}</i></a>
-                            </li>
-                            <li><b>website: </b> <a
-                                href={props.profile.contacts.website}><i>{props.profile.contacts.website || ""}</i></a>
-                            </li>
-                            <li><b>youtube: </b> <a
-                                href={props.profile.contacts.youtube}><i>{props.profile.contacts.youtube || ""}</i></a>
-                            </li>
-                            <li><b>mainLink: </b> <a
-                                href={props.profile.contacts.mainLink}><i>{props.profile.contacts.mainLink || ""}</i></a>
-                            </li>
-                        </ul>
-                    </div>
+
+                    {editMode
+                        ? <ProfileDataForm profile={props.profile}
+                                           changeProfileData={props.changeProfileData}
+                                           deactivateEditMode={deactivateEditMode}
+                        />
+                        : <ProfileData profile={props.profile}
+                                       isOwner={props.isOwner}
+                                       onActivateEditMode={onActivateEditMode}
+                        />}
+
                 </div>
             </div>
         </div>
@@ -88,3 +79,48 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
 }
 
 export default ProfileInfo;
+
+type ProfileDataPropsType = {
+    profile: ProfilesType
+    isOwner: boolean
+    onActivateEditMode: () => void
+}
+
+const ProfileData = (props: ProfileDataPropsType) => {
+    return (
+        <div>
+            {props.isOwner && <div>
+                <button onClick={props.onActivateEditMode}>edit</button>
+            </div>}
+            <div className={s.blockInfoUser}>
+                <div><b>About me: </b> {props.profile.aboutMe}</div>
+                <div><b>Job Description: </b> {props.profile.lookingForAJobDescription}</div>
+                <div><b>looking a job: </b> {props.profile.lookingForAJob ? "Open to work" : "Busy"}</div>
+                <div className={s.contacts}>
+                    <b>Contacts</b>: {(Object.keys(props.profile.contacts) as Array<keyof ContactsType>).map((key, index) => {
+                    return <Contacts key={index} contactTitle={key} contactValue={props.profile.contacts[key]}/>
+                })}
+                </div>
+            </div>
+        </div>
+    );
+};
+
+
+type ContactsPropsType = {
+    contactTitle: string | null
+    contactValue: string | null
+}
+
+const Contacts = (props: ContactsPropsType) => {
+    return (
+        <div>
+            <ul>
+                <li><b>{props.contactTitle}</b>: <a href={props.contactValue ? props.contactValue : ""}>
+                    {props.contactValue ? props.contactValue : ""}</a>
+                </li>
+            </ul>
+        </div>
+    );
+};
+
