@@ -1,12 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Concert+One&family=Rakkas&display=swap');
 
 .app-wrapper {
+    background-color: aliceblue;
     margin: 0 auto;
     display: grid;
-    width: 1200px;
+    width: 1250px;
+    height: 100vh;
     grid-template-areas:
-  "h h"
-  "n c";
+  "header header"
+  "navbar content"
+  "footer footer";
 
     grid-template-rows: 80px 1fr;
     grid-template-columns: 2fr 10fr;
@@ -15,8 +18,11 @@
 }
 
 .app-wrapper-content {
-    grid-area: c;
+    grid-area: content;
     background-color: aliceblue;
+    border-radius: 10px;
+    margin: 5px;
+    /*height: 100%;*/
 }
 
 

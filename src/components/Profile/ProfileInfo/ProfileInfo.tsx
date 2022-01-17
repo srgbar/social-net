@@ -1,10 +1,10 @@
-import React, {ChangeEvent, useCallback, useState} from "react";
+import React, {ChangeEvent, useState} from "react";
 import s from "./ProfileInfo.module.css";
 import {Preloader} from "../../common/Preloader/Preloader";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import userPhoto from "../../../assets/images/user.png";
 import {ContactsType, ProfilesType} from "../../../redux/profile-reducer";
-import {faFileImage} from "@fortawesome/free-solid-svg-icons";
+import {faFileImage, faPen} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import ProfileDataForm, {FormProfileDataType} from "./ProfileDataForm";
 
@@ -46,13 +46,16 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                         {props.profile.fullName}
                     </div>
                     <div className={s.status}>
-                        <ProfileStatusWithHooks profile={props.profile} status={props.status}
-                                                updateStatus={props.updateStatus}/>
+                        {props.isOwner
+                            ? <ProfileStatusWithHooks profile={props.profile} status={props.status}
+                                                      updateStatus={props.updateStatus}/>
+                            : props.status || "I have not status"
+                        }
                     </div>
                 </div>
                 <div className={s.blockPhotoAndInfoUser}>
                     <div className={s.photo}>
-                        <img src={props.profile.photos.large != null ? props.profile.photos.large : userPhoto}/>
+                        <img src={props.profile.photos.small != null ? props.profile.photos.small : userPhoto}/>
                         {props.isOwner
                             ? <label>
                                 <FontAwesomeIcon icon={faFileImage} className={s.buttonLoad}/>
@@ -88,18 +91,39 @@ type ProfileDataPropsType = {
 
 const ProfileData = (props: ProfileDataPropsType) => {
     return (
-        <div>
-            {props.isOwner && <div>
-                <button onClick={props.onActivateEditMode}>edit</button>
+        <div className={s.formContainer}>
+            {props.isOwner && <div className={s.formButton}>
+                <button onClick={props.onActivateEditMode} className={s.button}><FontAwesomeIcon icon={faPen}/></button>
             </div>}
             <div className={s.blockInfoUser}>
-                <div><b>About me: </b> {props.profile.aboutMe}</div>
-                <div><b>Job Description: </b> {props.profile.lookingForAJobDescription}</div>
-                <div><b>looking a job: </b> {props.profile.lookingForAJob ? "Open to work" : "Busy"}</div>
-                <div className={s.contacts}>
-                    <b>Contacts</b>: {(Object.keys(props.profile.contacts) as Array<keyof ContactsType>).map((key, index) => {
-                    return <Contacts key={index} contactTitle={key} contactValue={props.profile.contacts[key]}/>
-                })}
+                <div className={s.field}><b style={{color: "chocolate"}}>About me: </b> {props.profile.aboutMe}</div>
+                <div className={s.field}><b style={{color: "chocolate"}}>Looking for a
+                    job: </b> {props.profile.lookingForAJob ? "Open to work" : "Busy"}</div>
+                <div className={s.field}><b style={{color: "chocolate"}}>My
+                    skills: </b> {props.profile.lookingForAJobDescription}</div>
+                <div className={s.field} style={{marginTop: 15}}>
+
+                    {
+                        props.profile.contacts.facebook ||
+                        props.profile.contacts.vk ||
+                        props.profile.contacts.twitter ||
+                        props.profile.contacts.instagram ||
+                        props.profile.contacts.mainLink ||
+                        props.profile.contacts.github ||
+                        props.profile.contacts.website ||
+                        props.profile.contacts.youtube
+
+                            ? <>
+                                <b style={{color: "chocolate"}}>Contacts: </b>{(Object.keys(props.profile.contacts) as Array<keyof ContactsType>).map((key, index) => {
+                                return <Contacts key={index} contactTitle={key} contactValue={props.profile.contacts[key]}/>
+                            })}
+                            </>
+                            : <div>
+                                <b style={{color: "chocolate"}}>Contacts: </b>no contacts
+                            </div>
+                    }
+
+
                 </div>
             </div>
         </div>
@@ -115,10 +139,14 @@ type ContactsPropsType = {
 const Contacts = (props: ContactsPropsType) => {
     return (
         <div>
-            <ul>
-                <li><b>{props.contactTitle}</b>: <a href={props.contactValue ? props.contactValue : ""}>
-                    {props.contactValue ? props.contactValue : ""}</a>
-                </li>
+            <ul className={s.field}>
+                {props.contactValue
+                    ? <li>
+                        <b style={{color: "chocolate"}}>{props.contactTitle}</b>: <a
+                        href={props.contactValue ? props.contactValue : ""}>
+                        {props.contactValue ? props.contactValue : ""}</a>
+                    </li>
+                    : null}
             </ul>
         </div>
     );

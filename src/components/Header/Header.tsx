@@ -6,8 +6,7 @@ import logo from "../../assets/images/black-map.png"
 
 const Header = (props: HeaderContainerPropsType) => {
     return <header className={s.header}>
-        {/*<img src={cub}/>*/}
-        <img src={logo}/>
+        {/*<img src={logo}/>*/}
         <div className={s.loginBlock}>
             {props.isAuth
                 ? <div>{props.login}

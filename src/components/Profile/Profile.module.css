@@ -1,0 +1,16 @@
+.profile {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.container {
+    margin-right: 5px;
+    margin-left: 5px;
+    display: flex;
+    flex-direction: row;
+    background-color: #f1f5f8;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    height: 100%;
+}

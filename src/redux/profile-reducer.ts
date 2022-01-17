@@ -175,37 +175,23 @@ export const savePhotoTC = (file: Blob): ThunkAction<void, AppStateType, unknown
     }
 }
 
-// export const changeProfileDataTC = (profile: FormProfileDataType,
-//                                     getState: () => AppStateType,
-//                                     setStatus: (status: string) => void)
-//     : ThunkAction<void, AppStateType, unknown, ActionsProfileType> => {
-//     const userId = getState().auth.data.userId;
-//     return async dispatch => {
-//         debugger
-//         const response = await profileAPI.changeProfileData(profile)
-//         if (response.data.resultCode === 0) {
-//             dispatch(getUserProfileTC(userId))
-//         } else {
-//             setStatus(response.data.messages[0])
-//         }
-//     }
-// }
-
-
 export const changeProfileDataTC = (profile: FormProfileDataType,
-setStatus: (status: string) => void)
+                                    setStatus: (status: string) => void)
     : ThunkAction<void, AppStateType, unknown, ActionsProfileType> => {
-    return (dispatch: ThunkDispatch<AppStateType, unknown, ActionsProfileType>, getState: () => AppStateType) => {
-        const userId = getState().auth.data.userId
-        profileAPI.changeProfileData(profile)
-            .then(data => {
-                if (data.resultCode === 0) {
-                    dispatch(getUserProfileTC(userId))
-                } else if (data.resultCode === 1) {
-                    const error = data.messages[0]
-                    setStatus(error)
-                }
-            })
+
+    return async (dispatch, getState: () => AppStateType) => {
+        debugger
+        const userId = getState().auth.data.userId;
+        const response = await profileAPI.changeProfileData(profile)
+        if (response.data.resultCode === 0) {
+            dispatch(getUserProfileTC(userId))
+        } else {
+            const key = response.data.messages[0].match(/Contacts->(\w+)/)[1].toLowerCase();
+            console.log(key)
+            setStatus(response.data.messages[0])
+            return Promise.reject(response.data.messages[0])
+
+        }
     }
 }
 

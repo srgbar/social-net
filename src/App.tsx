@@ -10,6 +10,7 @@ import {initializedAppTC} from "./redux/app-reducer";
 import {Preloader} from "./components/common/Preloader/Preloader";
 import store, {AppStateType} from "./redux/redux-store";
 import {withSuspense} from "./hoc/withSuspense";
+import {Footer} from "./Footer/Footer";
 
 export type MapStatePropsType = {
     initialized: boolean
@@ -50,6 +51,7 @@ class App extends React.Component<AppPropsType> {
                     <Route path="/login"
                            component={withSuspense(LoginPage)}/>
                 </div>
+                <Footer/>
             </div>
         )
     }

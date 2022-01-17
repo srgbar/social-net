@@ -16,21 +16,30 @@ export type FormProfileDataType = {
 
 type ProfileDataFormPropsType = {
     profile: FormProfileDataType
-    changeProfileData: (profile: FormProfileDataType, setStatus: (status: string) => void) => void
+    changeProfileData: (profile: FormProfileDataType,
+                        setStatus: (status: string) => void,
+                        setSubmitting: (isSubmitting: boolean) => void) => any
     deactivateEditMode: () => void
 }
 
 const ProfileDataForm = (props: ProfileDataFormPropsType) => {
 
-    const submit = (values: FormProfileDataType, {setStatus}: FormikHelpers<FormProfileDataType>) => {
-        props.changeProfileData(values, setStatus)
-        props.deactivateEditMode()
-        console.log(setStatus);
+    const submit = (values: FormProfileDataType, actions: FormikHelpers<FormProfileDataType>) => {
+        props.changeProfileData(values, actions.setStatus, actions.setSubmitting).then( () => {
+                props.deactivateEditMode()
+            })
+        // console.log(actions.setStatus, actions.setSubmitting)
     }
 
     const validationSchema = Yup.object().shape({
-        aboutMe: Yup.string()
+        fullName: Yup.string()
             .required('Field is required'),
+        aboutMe: Yup.string()
+            .required('Field is required')
+            .min(10, 'Min length is 10 symbols!'),
+        lookingForAJobDescription: Yup.string()
+            .required('Field is required')
+            .min(10, 'Min length is 10 symbols!'),
     });
 
     return (
@@ -39,14 +48,11 @@ const ProfileDataForm = (props: ProfileDataFormPropsType) => {
             validationSchema={validationSchema}
             onSubmit={submit}
         >
-            {({status, errors, touched}) => (
+            {({isSubmitting, status, errors, touched}) => (
                 <Form className={s.formContainer}>
                     <div className={s.formButton}>
                         <button type="submit" className={s.button}><FontAwesomeIcon icon={faCheck}/></button>
                         <button onClick={props.deactivateEditMode} className={s.button}>x</button>
-                    </div>
-                    <div className={s.errorServer}>
-                        {status && <div>{status}</div>}
                     </div>
                     <div className={s.blockInfoUser}>
                         <div className={s.field}>
@@ -55,12 +61,20 @@ const ProfileDataForm = (props: ProfileDataFormPropsType) => {
                                    className={errors.fullName && touched.fullName ? s.errorForm : s.form}
                             />
                         </div>
+                        <span className={errors.fullName && touched.fullName ? s.spanError : ""}>
+                                {errors.fullName && touched.fullName ?
+                                    <div>{errors.fullName}</div> : null}
+                            </span>
                         <div className={s.field}>
                             <span><b>About me: </b></span>
                             <Field name="aboutMe" type="text"
                                    className={errors.aboutMe && touched.aboutMe ? s.errorForm : s.form}
                             />
                         </div>
+                        <span className={errors.aboutMe && touched.aboutMe ? s.spanError : ""}>
+                                {errors.aboutMe && touched.aboutMe ?
+                                    <div>{errors.aboutMe}</div> : null}
+                            </span>
                         <div className={s.checkboxField}>
                             <span><b>Looking for a job: </b></span>
                             <Field name="lookingForAJob" type="checkbox"
@@ -68,17 +82,24 @@ const ProfileDataForm = (props: ProfileDataFormPropsType) => {
                             />
                         </div>
                         <div className={s.field}>
-                            <span><b>Job description: </b></span>
+                            <span><b>My skills: </b></span>
                             <Field name="lookingForAJobDescription" type="text"
                                    className={errors.lookingForAJobDescription && touched.lookingForAJobDescription ? s.errorForm : s.form}
                             />
                         </div>
+                        <span className={errors.lookingForAJobDescription && touched.lookingForAJobDescription ? s.spanError : ""}>
+                                {errors.lookingForAJobDescription && touched.lookingForAJobDescription ?
+                                    <div>{errors.lookingForAJobDescription}</div> : null}
+                            </span>
                         <div>
                             <b>Contacts</b>: {(Object.keys(props.profile.contacts) as Array<keyof ContactsType>).map((key, index) => {
                             return <div key={key} className={s.field}>
-                            <span>{key}: </span><Field name={"contacts." + key} type="text" className={s.form}/>
+                                <span>{key}: </span><Field name={"contacts." + key} type="text" className={s.form}/>
                             </div>
                         })}
+                        </div>
+                        <div className={s.errorServer}>
+                            {isSubmitting && status && <div>{status}</div>}
                         </div>
                     </div>
                 </Form>

@@ -9,7 +9,7 @@ const MyPosts = React.memo<MyPostsPropsType>(props => {
 
     return (
         <div className={s.postsBlock}>
-            <h3 className={s.header}>My posts</h3>
+            <h2 className={s.header}>My posts</h2>
             <div>
                 <AddNewMessageForm
                     addPost={props.addPost}

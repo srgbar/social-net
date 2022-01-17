@@ -1,12 +1,21 @@
 .nav {
-    grid-area: n;
+    grid-area: navbar;
     padding: 20px;
     background-color: #3cc4b4;
+    border-radius: 10px;
+    margin: 5px;
 }
 
 .item a {
     color: white;
     text-decoration: none;
+    font-size: 20px;
+
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .item a.activeLink {

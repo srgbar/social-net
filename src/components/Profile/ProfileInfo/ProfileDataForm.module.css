@@ -34,7 +34,7 @@
 .field {
     display: flex;
     justify-content: flex-end;
-    width: 250px;
+    /*width: 250px;*/
     margin: 5px;
 }
 
@@ -61,6 +61,18 @@
     margin-top: 5px;
     font-size: 0.95rem;
 }
+
+.errorForm {
+    border: 2px solid red;
+    border-radius: 4px;
+    margin-left: 5px;
+}
+
+.spanError {
+    color: red;
+    font-size: 0.9rem;
+}
+
 
 .contactFields {
     display: flex;

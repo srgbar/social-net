@@ -1,11 +1,11 @@
 import axios from "axios";
 import {FormProfileDataType} from "../components/Profile/ProfileInfo/ProfileDataForm";
 
-// export type CommonResponseType<T = {}> = {
-//     resultCode: number
-//     messages: string[]
-//     data: T
-// }
+export type CommonResponseType<T = {}> = {
+    resultCode: number
+    messages: string[]
+    data: T
+}
 
 const instance = axios.create({
     withCredentials: true,
@@ -55,9 +55,9 @@ export const profileAPI = {
     },
     changeProfileData(profile: FormProfileDataType) {
         return instance.put(`profile`, profile)
-            .then(response => {
-                return response.data
-            })
+            // .then(response => {
+            //     return response.data
+            // })
     }
 }
 

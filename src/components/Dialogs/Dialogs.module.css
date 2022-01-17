@@ -1,6 +1,6 @@
 .dialogs {
     display: flex;
-    height: 80vh;
+    /*height: 100vh;*/
     flex-direction: column;
     justify-content: flex-start;
     padding: 20px;
