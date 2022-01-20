@@ -25,9 +25,9 @@ type ProfileDataFormPropsType = {
 const ProfileDataForm = (props: ProfileDataFormPropsType) => {
 
     const submit = (values: FormProfileDataType, actions: FormikHelpers<FormProfileDataType>) => {
-        props.changeProfileData(values, actions.setStatus, actions.setSubmitting).then( () => {
-                props.deactivateEditMode()
-            })
+        props.changeProfileData(values, actions.setStatus, actions.setSubmitting).then(() => {
+            props.deactivateEditMode()
+        })
         // console.log(actions.setStatus, actions.setSubmitting)
     }
 
@@ -87,7 +87,8 @@ const ProfileDataForm = (props: ProfileDataFormPropsType) => {
                                    className={errors.lookingForAJobDescription && touched.lookingForAJobDescription ? s.errorForm : s.form}
                             />
                         </div>
-                        <span className={errors.lookingForAJobDescription && touched.lookingForAJobDescription ? s.spanError : ""}>
+                        <span
+                            className={errors.lookingForAJobDescription && touched.lookingForAJobDescription ? s.spanError : ""}>
                                 {errors.lookingForAJobDescription && touched.lookingForAJobDescription ?
                                     <div>{errors.lookingForAJobDescription}</div> : null}
                             </span>
@@ -98,9 +99,9 @@ const ProfileDataForm = (props: ProfileDataFormPropsType) => {
                             </div>
                         })}
                         </div>
-                        <div className={s.errorServer}>
+                        <span className={s.errorServer}>
                             {isSubmitting && status && <div>{status}</div>}
-                        </div>
+                        </span>
                     </div>
                 </Form>
             )}

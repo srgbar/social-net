@@ -11,24 +11,30 @@ type FormDataLoginType = {
     email: string
     password: string
     rememberMe: boolean
+    captcha: string
 }
 
 type LoginType = {
-    loginTC: (email: string, password: string, rememberMe: boolean, setStatus: (status: string) => void) => void
+    loginTC: (email: string, password: string, rememberMe: boolean, captcha: string, setStatus: (status: string) => void) => void
     isAuth: boolean
+    captchaUrl: string | null
 }
 
 const LoginPage = (props: LoginType) => {
+    debugger
 
     const submit = (values: FormDataLoginType, {setStatus}: FormikHelpers<FormDataLoginType>) => {
-        console.log(setStatus);
-        props.loginTC(values.email, values.password, values.rememberMe, setStatus)
+        debugger
+        console.log(values);
+        props.loginTC(values.email, values.password, values.rememberMe, values.captcha, setStatus)
     }
 
     const validationSchema = Yup.object().shape({
         email: Yup.string()
             .required('Field is required'),
         password: Yup.string()
+            .required('Field is required'),
+        captcha: Yup.string()
             .required('Field is required')
     });
 
@@ -40,7 +46,7 @@ const LoginPage = (props: LoginType) => {
         <div className={s.text}>
             <h1>login</h1>
             <Formik
-                initialValues={{email: '', password: '', rememberMe: false}}
+                initialValues={{email: '', password: '', rememberMe: false, captcha: " "}}
                 validationSchema={validationSchema}
                 onSubmit={submit}
             >
@@ -77,18 +83,35 @@ const LoginPage = (props: LoginType) => {
                                     ? <div>{errors.password}</div> : null}
                             </span>
                         <div>
-                            <Field name={"rememberMe"} type={"checkbox"}/>remember me
+                            <Field name="rememberMe" type="checkbox"/>remember me
                         </div>
                         <div>
                             <button type="submit"
                                     className={s.button}
-                                    disabled={!!((errors.email && touched.email) || (errors.password && touched.password))}
+                                    disabled={!!((errors.email && touched.email) ||
+                                        (errors.password && touched.password) ||
+                                        (errors.captcha && touched.captcha))}
                             >Submit
                             </button>
                         </div>
                         <div className={s.errorServer}>
                             {status && <div>{status}</div>}
                         </div>
+                        {props.captchaUrl &&
+                        <div>
+                            <div>
+                                <img src={props.captchaUrl}/>
+                            </div>
+                            <div>
+                                <Field name="captcha" type="text" placeholder="enter symbols from image"
+                                       className={errors.captcha && touched.captcha ? s.errorForm : s.form}/>
+                                <span className={errors.captcha && touched.captcha ? s.spanError : ""}>
+                                 {errors.captcha && touched.captcha
+                                     ? <div>{errors.captcha}</div> : null}
+                            </span>
+                            </div>
+                        </div>
+                        }
                     </Form>
                 )}
             </Formik>
@@ -97,7 +120,8 @@ const LoginPage = (props: LoginType) => {
 }
 
 const mapStateToProps = (state: AppStateType) => ({
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    captchaUrl: state.auth.captchaUrl
 })
 
 export default connect(mapStateToProps, {loginTC})(LoginPage);

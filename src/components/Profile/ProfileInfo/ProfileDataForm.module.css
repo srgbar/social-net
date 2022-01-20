@@ -33,8 +33,7 @@
 
 .field {
     display: flex;
-    justify-content: flex-end;
-    /*width: 250px;*/
+    justify-content: space-between;
     margin: 5px;
 }
 

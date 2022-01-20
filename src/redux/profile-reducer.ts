@@ -180,17 +180,14 @@ export const changeProfileDataTC = (profile: FormProfileDataType,
     : ThunkAction<void, AppStateType, unknown, ActionsProfileType> => {
 
     return async (dispatch, getState: () => AppStateType) => {
-        debugger
         const userId = getState().auth.data.userId;
         const response = await profileAPI.changeProfileData(profile)
         if (response.data.resultCode === 0) {
             dispatch(getUserProfileTC(userId))
         } else {
             const key = response.data.messages[0].match(/Contacts->(\w+)/)[1].toLowerCase();
-            console.log(key)
-            setStatus(response.data.messages[0])
+            setStatus("Invalid url format" + " " + key)
             return Promise.reject(response.data.messages[0])
-
         }
     }
 }
