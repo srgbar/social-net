@@ -3,8 +3,9 @@ import React from "react";
 import s from "./ProfileDataForm.module.css";
 import {Field, Form, Formik, FormikHelpers} from "formik";
 import * as Yup from "yup";
-import {faCheck} from "@fortawesome/free-solid-svg-icons/faCheck";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faReply} from "@fortawesome/free-solid-svg-icons/faReply";
+import {faPlus} from "@fortawesome/free-solid-svg-icons/faPlus";
 
 export type FormProfileDataType = {
     fullName: string
@@ -51,8 +52,8 @@ const ProfileDataForm = (props: ProfileDataFormPropsType) => {
             {({isSubmitting, status, errors, touched}) => (
                 <Form className={s.formContainer}>
                     <div className={s.formButton}>
-                        <button type="submit" className={s.button}><FontAwesomeIcon icon={faCheck}/></button>
-                        <button onClick={props.deactivateEditMode} className={s.button}>x</button>
+                        <button type="submit" className={s.button}><FontAwesomeIcon icon={faPlus}/></button>
+                        <button onClick={props.deactivateEditMode} className={s.button}><FontAwesomeIcon icon={faReply}/></button>
                     </div>
                     <div className={s.blockInfoUser}>
                         <div className={s.field}>

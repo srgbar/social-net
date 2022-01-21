@@ -5,7 +5,6 @@ import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import AddNewMessageForm from "../common/AddNewMessageForm/AddNewMessageForm";
 
-
 const Dialogs = (props: DialogsPropsType) => {
 
     const state = props.dialogsPage;

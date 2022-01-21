@@ -1,8 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@1,600&display=swap');
+
 .header {
     grid-area: header;
     background-color: #dff6f8;
     border-radius: 10px;
     margin: 5px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.title {
+    font-size: 40px;
+    margin: 10px;
+    font-family: 'Vollkorn', serif;
+    color: #8a63a4;
 }
 
 .header img {
@@ -11,7 +25,7 @@
 }
 
 .loginBlock {
-    float: right;
+    /*float: right;*/
     margin: 10px;
 }
 

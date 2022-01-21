@@ -93,7 +93,19 @@
 }
 
 .photo .buttonLoad {
-    width: 25px;
-    height: 25px;
+    background-color: #b0efeb;
+    border-radius: 4px;
+    border: 2px solid black;
+    width: 13px;
+    height: 13px;
+    padding: 2px;
     margin-left: 10px;
+}
+
+.button {
+    background-color: #b0efeb;
+    width: 22px;
+    height: 22px;
+    margin-left: 1px;
+    padding: 2px;
 }

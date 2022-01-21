@@ -24,6 +24,7 @@ export type AppPropsType = MapStatePropsType & MapDispatchPropsType
 const DialogsContainer = React.lazy(() => import("./components/Dialogs/DialogsContainer"));
 const ProfileContainer = React.lazy(() => import("./components/Profile/ProfileContainer"));
 const LoginPage = React.lazy(() => import("./components/Login/Login"));
+const Music = React.lazy(() => import("./components/Music/Music"));
 
 
 class App extends React.Component<AppPropsType> {
@@ -50,6 +51,8 @@ class App extends React.Component<AppPropsType> {
                            render={() => <UsersContainer/>}/>
                     <Route path="/login"
                            component={withSuspense(LoginPage)}/>
+                    <Route path="/music"
+                           component={withSuspense(Music)}/>
                 </div>
                 <Footer/>
             </div>

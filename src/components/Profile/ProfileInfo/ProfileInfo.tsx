@@ -4,9 +4,10 @@ import {Preloader} from "../../common/Preloader/Preloader";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import userPhoto from "../../../assets/images/user.png";
 import {ContactsType, ProfilesType} from "../../../redux/profile-reducer";
-import {faFileImage, faPen} from "@fortawesome/free-solid-svg-icons";
+import {faPen} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import ProfileDataForm, {FormProfileDataType} from "./ProfileDataForm";
+import {faPaintBrush} from "@fortawesome/free-solid-svg-icons/faPaintBrush";
 
 type ProfileInfoPropsType = {
     profile: ProfilesType
@@ -55,10 +56,10 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                 </div>
                 <div className={s.blockPhotoAndInfoUser}>
                     <div className={s.photo}>
-                        <img src={props.profile.photos.small != null ? props.profile.photos.small : userPhoto}/>
+                        <img src={props.profile.photos.small != null ? props.profile.photos.small : userPhoto} alt={"user photo"}/>
                         {props.isOwner
                             ? <label>
-                                <FontAwesomeIcon icon={faFileImage} className={s.buttonLoad}/>
+                                <FontAwesomeIcon icon={faPaintBrush} className={s.buttonLoad}/>
                                 <input type="file" onChange={onMainPhotoSelected}/>
                             </label>
                             : ""
