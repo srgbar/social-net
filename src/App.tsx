@@ -10,7 +10,7 @@ import {initializedAppTC} from "./redux/app-reducer";
 import {Preloader} from "./components/common/Preloader/Preloader";
 import store, {AppStateType} from "./redux/redux-store";
 import {withSuspense} from "./hoc/withSuspense";
-import {Footer} from "./Footer/Footer";
+import {Footer} from "./components/Footer/Footer";
 
 export type MapStatePropsType = {
     initialized: boolean
@@ -25,6 +25,7 @@ const DialogsContainer = React.lazy(() => import("./components/Dialogs/DialogsCo
 const ProfileContainer = React.lazy(() => import("./components/Profile/ProfileContainer"));
 const LoginPage = React.lazy(() => import("./components/Login/Login"));
 const Music = React.lazy(() => import("./components/Music/Music"));
+const News = React.lazy(() => import("./components/News/News"));
 
 
 class App extends React.Component<AppPropsType> {
@@ -53,6 +54,8 @@ class App extends React.Component<AppPropsType> {
                            component={withSuspense(LoginPage)}/>
                     <Route path="/music"
                            component={withSuspense(Music)}/>
+                    <Route path="/news"
+                           component={withSuspense(News)}/>
                 </div>
                 <Footer/>
             </div>

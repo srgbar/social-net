@@ -1,0 +1,6 @@
+.containerMusics {
+    display: flex;
+    flex-direction: column;
+    margin-left: 15px;
+    align-items: center;
+}

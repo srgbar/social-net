@@ -9,8 +9,8 @@ const Dialogs = (props: DialogsPropsType) => {
 
     const state = props.dialogsPage;
 
-    const dialogsElements = state.dialogs.map((d) => <DialogItem name={d.name} key={d.id} id={d.id}/>);
-    const messagesElements = state.messages.map((m) => <Message message={m.message} key={m.id} id={m.id}/>);
+    const dialogsElements = state.messages.map((d) => <DialogItem name={d.name} key={d.id} id={d.id} message={d.message}/>);
+    const messagesElements = state.messages.map((m) => <Message message={m.message} key={m.id} id={m.id} name={m.name}/>);
 
     return (
         <div className={s.dialogs}>

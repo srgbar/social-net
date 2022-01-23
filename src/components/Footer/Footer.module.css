@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@1,600&display=swap');
+
+.footer {
+    grid-area: footer;
+    background-color: #98b9e8;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    margin: 5px;
+}
+
+.footerText {
+    font-family: 'Vollkorn', serif;
+    text-align: center;
+    color: black;
+    font-size: 14px;
+}

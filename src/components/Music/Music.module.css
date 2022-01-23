@@ -1,5 +1,19 @@
 .containerMusics {
     display: flex;
-    flex-direction: column;
-    margin-left: 15px;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.tracksHard {
+    padding: 25px;
+    background-color: #d8bff5;
+    max-width: 300px;
+    border-radius: 10px;
+}
+
+.tracksLite {
+    padding: 25px;
+    background-color: #bff5d2;
+    max-width: 300px;
+    border-radius: 10px;
 }
