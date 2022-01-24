@@ -1,11 +1,16 @@
 .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /*flex-wrap: wrap;*/
     color: #309e82;
     font-style: italic;
+    margin-top: 5px;
 }
 
 .item img {
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     border-radius: 30px;
 }
 

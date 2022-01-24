@@ -5,7 +5,7 @@
     margin: 0 auto;
     display: grid;
     width: 1250px;
-    height: 100vh;
+    min-height: 100vh;
     grid-template-areas:
   "header header"
   "navbar content"

@@ -18,6 +18,7 @@ const MyPosts = React.memo<MyPostsPropsType>(props => {
                 />
                 <Post posts={props.posts}
                       smallImage={props.smallImage}
+                      increase={props.increaseLike}
                 />
             </div>
         </div>)

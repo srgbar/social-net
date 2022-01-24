@@ -1,5 +1,10 @@
 .postsBlock {
+    display: flex;
+    flex-direction: column;
     padding: 20px;
+    border-radius: 10px;
+    background-color: #c2eee3;
+    margin: 10px;
 }
 
 .header {

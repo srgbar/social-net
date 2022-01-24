@@ -52,18 +52,24 @@ export type savePhotoActionType = {
     type: "PROFILE-PAGE/SAVE-PHOTO-SUCCESS"
     photo: string
 }
+export type increaseLikeActionType = {
+    type: "PROFILE-PAGE/INCREASE-LIKE"
+    postId: number
+}
+
 type ActionsProfileType = AddPostActionType
     | setUserProfileActionType
     | setStatusActionType
     | deletePostActionType
-    | savePhotoActionType;
+    | savePhotoActionType
+    | increaseLikeActionType;
 
 export type InitialProfileStateType = typeof initialState
 
 const initialState = {
     posts: [
-        {id: 1, message: "Hi, how are you?", likesCount: 12},
-        {id: 2, message: "It\'s my first post", likesCount: 11},
+        {id: 1, message: "Hi, how are you?", likesCount: 8},
+        {id: 2, message: "It\'s my first post", likesCount: 3},
         {id: 3, message: "Awesome!", likesCount: 5}
     ] as Array<PostsType>,
     profile: {
@@ -122,6 +128,11 @@ const profileReducer = (state: InitialProfileStateType = initialState, action: A
                     }
                 }
             }
+        case "PROFILE-PAGE/INCREASE-LIKE":
+            return {
+                ...state,
+                posts: state.posts.map(p => p.id === action.postId ? {...p, likesCount: p.likesCount + 1} : p)
+            }
         default:
             return state;
     }
@@ -129,20 +140,18 @@ const profileReducer = (state: InitialProfileStateType = initialState, action: A
 
 export default profileReducer;
 
-export const addPostAC = (newMessageText: string): AddPostActionType =>
-    ({type: "PROFILE-PAGE/ADD-POST", newMessageText} as const)
+export const addPostAC = (newMessageText: string): AddPostActionType => ({
+    type: "PROFILE-PAGE/ADD-POST", newMessageText} as const)
 export const setUserProfileAC = (profile: ProfilesType): setUserProfileActionType => ({
-    type: "PROFILE-PAGE/SET-USER-PROFILE", profile
-} as const)
+    type: "PROFILE-PAGE/SET-USER-PROFILE", profile} as const)
 export const setStatusAC = (status: string): setStatusActionType => ({
-    type: "PROFILE-PAGE/SET-STATUS", status
-} as const)
+    type: "PROFILE-PAGE/SET-STATUS", status} as const)
 export const deletePostAC = (postId: number): deletePostActionType => ({
-    type: "PROFILE-PAGE/DELETE-POST", postId
-} as const)
+    type: "PROFILE-PAGE/DELETE-POST", postId} as const)
 export const savePhotoSuccessAC = (photo: string): savePhotoActionType => ({
-    type: "PROFILE-PAGE/SAVE-PHOTO-SUCCESS", photo
-} as const)
+    type: "PROFILE-PAGE/SAVE-PHOTO-SUCCESS", photo} as const)
+export const increaseLikeAC = (postId: number) => ({
+    type: "PROFILE-PAGE/INCREASE-LIKE", postId} as const)
 
 
 export const getUserProfileTC = (userId: number): ThunkAction<void, AppStateType, unknown, ActionsProfileType> => {

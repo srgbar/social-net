@@ -40,7 +40,6 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
     }
 
     return (
-        <div>
             <div className={s.descriptionBlock}>
                 <div className={s.groopOfNameAndStatus}>
                     <div className={s.fullName}>
@@ -78,7 +77,6 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
 
                 </div>
             </div>
-        </div>
     )
 }
 

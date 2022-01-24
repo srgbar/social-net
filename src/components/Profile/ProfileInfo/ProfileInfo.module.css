@@ -1,17 +1,10 @@
 .descriptionBlock {
     display: flex;
-    /*flex-wrap: wrap;*/
-    justify-content: flex-start;
     flex-direction: column;
-    align-items: center;
-    margin: 15px;
-    padding: 15px;
-    border: solid #32a1ce;
+    padding: 20px;
     border-radius: 10px;
-    /*max-width: 140vh;*/
-    /*max-height: 800px;*/
-    background-color: #e1faf4;
-    /*text-align: center;*/
+    margin: 10px;
+    background-color: #dbe3f1;
 }
 
 .groopOfNameAndStatus {
@@ -33,7 +26,9 @@
 
 .blockPhotoAndInfoUser {
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
+    align-items: center;
     margin: 20px;
 }
 
@@ -45,8 +40,8 @@
 .photo img {
     /*border: 2mm dashed rgb(157, 234, 207);*/
     /*border: solid 3px #5fa6c4;*/
-    max-height: 300px;
-    max-width: 300px;
+    max-height: 100px;
+    max-width: 100px;
     border-radius: 5%;
 }
 
@@ -54,7 +49,7 @@
     display: flex;
     flex-direction: row-reverse;
     justify-content: flex-start;
-    margin: 3px;
+    margin-top: 15px;
 }
 
 .formButton {
@@ -76,11 +71,10 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    border: solid 3px #5fa6c4;
+    /*border: solid 3px #5fa6c4;*/
     border-radius: 10px;
     background-color: white;
     padding: 10px;
-    margin-left: 15px;
 }
 
 .field {

@@ -1,9 +1,8 @@
 .formContainer {
     display: flex;
     flex-direction: row-reverse;
-    justify-content: normal;
     text-align: center;
-    margin: 3px;
+    margin-top: 15px;
 }
 
 .formButton {
@@ -13,7 +12,7 @@
 }
 
 .button {
-    background-color: #e1eaf3;
+    background-color: #b0efeb;
     border-radius: 4px;
     width: 20px;
     height: 20px;
@@ -26,9 +25,9 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    border: solid 3px #5fa6c4;
+    /*border: solid 3px #5fa6c4;*/
     border-radius: 10px;
-    background-color: #e1eaf3;
+    background-color: #cbd2d9;
     padding: 10px;
 }
 

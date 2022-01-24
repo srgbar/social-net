@@ -1,7 +1,7 @@
 import React from "react";
 import s from "./AddNewMessageForm.module.css";
 import * as Yup from "yup";
-import {Field, Form, Formik} from "formik";
+import {Field, Form, Formik, FormikHelpers} from "formik";
 
 
 type FormMessageType = {
@@ -14,15 +14,16 @@ type AddNewMessageFormType = {
     titleOfButton: string
 }
 
-const AddNewMessageForm = (props: AddNewMessageFormType) => {
+const AddNewMessageForm = (props: AddNewMessageFormType, { resetForm }: FormikHelpers<AddNewMessageFormType>) => {
 
     const submit = (values: FormMessageType) => {
-        props.addPost(values.newMessageText)
+        props.addPost(values.newMessageText);
+        resetForm()
     }
 
     const validationSchema = Yup.object().shape({
         newMessageText: Yup.string()
-            // .min(2, 'Too short message!')
+            .min(2, 'Too short message!')
             .max(100, 'Maximum length is 100 symbols!')
             .required('Field is required')
     });
@@ -33,7 +34,7 @@ const AddNewMessageForm = (props: AddNewMessageFormType) => {
             validationSchema={validationSchema}
             onSubmit={submit}
         >
-            {({errors, touched}) => (
+            {({values,errors, touched}) => (
                 <Form>
                     <div className={s.formik}>
                         <Field
@@ -41,6 +42,7 @@ const AddNewMessageForm = (props: AddNewMessageFormType) => {
                             type="text"
                             placeholder={props.placeholder}
                             className={errors.newMessageText && touched.newMessageText ? s.inputError : s.input}
+                            value={values.newMessageText || ''}
                         />
                         <button
                             type="submit"
