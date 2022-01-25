@@ -10,9 +10,7 @@ const Header = (props: HeaderContainerPropsType) => {
     return <header className={s.header}>
         <div className={s.container}>
             <img src={logo}/>
-            <div className={s.title}>
-                Social Network
-                <FontAwesomeIcon icon={faDragon} style={{marginLeft: 10}}/>
+            <div className={s.title}>Social Network<FontAwesomeIcon icon={faDragon} style={{marginLeft: 10}}/>
                 {/*<FontAwesomeIcon icon={faAtom} style={{marginLeft: 10}}/>*/}
             </div>
             <div className={s.loginBlock}>

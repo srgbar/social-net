@@ -5,6 +5,7 @@
     border-radius: 10px;
     margin: 10px;
     background-color: #dbe3f1;
+    min-width: 400px;
 }
 
 .groopOfNameAndStatus {
