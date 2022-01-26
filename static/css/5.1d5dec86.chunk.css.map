@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack://src/components/Music/Music.module.css"],"names":[],"mappings":"AAAA,8BACI,YAAa,CACb,qBAAsB,CACtB,gBACJ","file":"5.1d5dec86.chunk.css","sourcesContent":[".containerMusics {\r\n    display: flex;\r\n    flex-direction: column;\r\n    margin-left: 15px;\r\n}"]}
