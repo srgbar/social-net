@@ -58,6 +58,8 @@ class App extends React.Component<AppPropsType> {
                                component={withSuspense(Music)}/>
                         <Route path="/news"
                                component={withSuspense(News)}/>
+                        <Route path="/settings"
+                               render={() => <div>in progress...</div>}/>
                     </Switch>
                 </div>
                 <Footer/>
@@ -76,11 +78,11 @@ const AppContainer = compose<React.ComponentType>(
     withRouter, connect(mapStateToProps, {initializedAppTC}))(App);
 
 const SamuraiJSApp = () => {
-    return <BrowserRouter basename={process.env.PUBLIC_URL}>
+    return <HashRouter basename={process.env.PUBLIC_URL}>
         <Provider store={store}>
             <AppContainer/>
         </Provider>
-    </BrowserRouter>
+    </HashRouter>
 }
 
 export default SamuraiJSApp;

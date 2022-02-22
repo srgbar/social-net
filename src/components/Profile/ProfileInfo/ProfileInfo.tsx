@@ -40,43 +40,44 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
     }
 
     return (
-            <div className={s.descriptionBlock}>
-                <div className={s.groopOfNameAndStatus}>
-                    <div className={s.fullName}>
-                        {props.profile.fullName}
-                    </div>
-                    <div className={s.status}>
-                        {props.isOwner
-                            ? <ProfileStatusWithHooks profile={props.profile} status={props.status}
-                                                      updateStatus={props.updateStatus}/>
-                            : props.status || "I have not status"
-                        }
-                    </div>
+        <div className={s.descriptionBlock}>
+            <div className={s.groopOfNameAndStatus}>
+                <div className={s.fullName}>
+                    {props.profile.fullName}
                 </div>
-                <div className={s.blockPhotoAndInfoUser}>
-                    <div className={s.photo}>
-                        <img src={props.profile.photos.small != null ? props.profile.photos.small : userPhoto} alt={"user photo"}/>
-                        {props.isOwner
-                            ? <label>
-                                <FontAwesomeIcon icon={faPaintBrush} className={s.buttonLoad}/>
-                                <input type="file" onChange={onMainPhotoSelected}/>
-                            </label>
-                            : ""
-                        }
-                    </div>
-
-                    {editMode
-                        ? <ProfileDataForm profile={props.profile}
-                                           changeProfileData={props.changeProfileData}
-                                           deactivateEditMode={deactivateEditMode}
-                        />
-                        : <ProfileData profile={props.profile}
-                                       isOwner={props.isOwner}
-                                       onActivateEditMode={onActivateEditMode}
-                        />}
-
+                <div className={s.status}>
+                    {props.isOwner
+                        ? <ProfileStatusWithHooks profile={props.profile} status={props.status}
+                                                  updateStatus={props.updateStatus}/>
+                        : props.status || "I have not status"
+                    }
                 </div>
             </div>
+            <div className={s.blockPhotoAndInfoUser}>
+                <div className={s.photo}>
+                    <img src={props.profile.photos.small != null ? props.profile.photos.small : userPhoto}
+                         alt={"user photo"}/>
+                    {props.isOwner
+                        ? <label>
+                            <FontAwesomeIcon icon={faPaintBrush} className={s.buttonLoad}/>
+                            <input type="file" onChange={onMainPhotoSelected}/>
+                        </label>
+                        : ""
+                    }
+                </div>
+
+                {editMode
+                    ? <ProfileDataForm profile={props.profile}
+                                       changeProfileData={props.changeProfileData}
+                                       deactivateEditMode={deactivateEditMode}
+                    />
+                    : <ProfileData profile={props.profile}
+                                   isOwner={props.isOwner}
+                                   onActivateEditMode={onActivateEditMode}
+                    />}
+
+            </div>
+        </div>
     )
 }
 
@@ -95,11 +96,15 @@ const ProfileData = (props: ProfileDataPropsType) => {
                 <button onClick={props.onActivateEditMode} className={s.button}><FontAwesomeIcon icon={faPen}/></button>
             </div>}
             <div className={s.blockInfoUser}>
-                <div className={s.field}><b style={{color: "chocolate"}}>About me: </b> {props.profile.aboutMe}</div>
+                {props.profile.aboutMe
+                    ? <div className={s.field}><b style={{color: "chocolate"}}>About me: </b> {props.profile.aboutMe}
+                    </div>
+                    : ""
+                }
                 <div className={s.field}><b style={{color: "chocolate"}}>Looking for a
                     job: </b> {props.profile.lookingForAJob ? "Open to work" : "Busy"}</div>
                 <div className={s.field}><b style={{color: "chocolate"}}>My
-                    skills: </b> {props.profile.lookingForAJobDescription}</div>
+                    skills: </b> {props.profile.lookingForAJobDescription ? props.profile.lookingForAJobDescription : "the field is not filled"}</div>
                 <div className={s.field} style={{marginTop: 15}}>
 
                     {
