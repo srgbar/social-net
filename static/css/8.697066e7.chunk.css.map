@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/components/News/News.module.css"],"names":[],"mappings":"AAAA,6BACI,YAAa,CACb,qBAAsB,CACtB,gBAAiB,CACjB,kBACJ","file":"8.697066e7.chunk.css","sourcesContent":[".containerMusics {\r\n    display: flex;\r\n    flex-direction: column;\r\n    margin-left: 15px;\r\n    align-items: center;\r\n}"]}
