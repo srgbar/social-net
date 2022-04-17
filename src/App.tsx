@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import {BrowserRouter, HashRouter, Redirect, Route, Switch, withRouter} from "react-router-dom";
+import {HashRouter, Redirect, Route, Switch, withRouter} from "react-router-dom";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import Navbar from "./components/Navbar/Navbar";
@@ -8,7 +8,7 @@ import {connect, Provider} from "react-redux";
 import {compose} from "redux";
 import {initializedAppTC} from "./redux/app-reducer";
 import {Preloader} from "./components/common/Preloader/Preloader";
-import store, {AppStateType} from "./redux/redux-store";
+import {AppStateType, store} from "./redux/redux-store";
 import {withSuspense} from "./hoc/withSuspense";
 import {Footer} from "./components/Footer/Footer";
 

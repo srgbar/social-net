@@ -1,8 +1,9 @@
-import {ThunkAction, ThunkDispatch} from "redux-thunk";
+import {ThunkAction} from "redux-thunk";
 import {AppStateType} from "./redux-store";
 import {profileAPI, userAPI} from "../api/api";
 import {FormProfileDataType} from "../components/Profile/ProfileInfo/ProfileDataForm";
 
+// types
 export type ContactsType = {
     github: string | null,
     vk: string | null,
@@ -32,37 +33,13 @@ export type PostsType = {
     likesCount: number
 }
 
-export type AddPostActionType = {
-    type: "PROFILE-PAGE/ADD-POST"
-    newMessageText: string
-}
-export type setUserProfileActionType = {
-    type: "PROFILE-PAGE/SET-USER-PROFILE"
-    profile: ProfilesType
-}
-export type setStatusActionType = {
-    type: "PROFILE-PAGE/SET-STATUS"
-    status: string
-}
-export type deletePostActionType = {
-    type: "PROFILE-PAGE/DELETE-POST"
-    postId: number
-}
-export type savePhotoActionType = {
-    type: "PROFILE-PAGE/SAVE-PHOTO-SUCCESS"
-    photo: string
-}
-export type increaseLikeActionType = {
-    type: "PROFILE-PAGE/INCREASE-LIKE"
-    postId: number
-}
-
-type ActionsProfileType = AddPostActionType
-    | setUserProfileActionType
-    | setStatusActionType
-    | deletePostActionType
-    | savePhotoActionType
-    | increaseLikeActionType;
+type ActionsProfileType =
+    | ReturnType<typeof addPostAC>
+    | ReturnType<typeof setUserProfileAC>
+    | ReturnType<typeof setStatusAC>
+    | ReturnType<typeof deletePostAC>
+    | ReturnType<typeof savePhotoSuccessAC>
+    | ReturnType<typeof increaseLikeAC>
 
 export type InitialProfileStateType = typeof initialState
 
@@ -95,7 +72,7 @@ const initialState = {
     status: "",
 };
 
-const profileReducer = (state: InitialProfileStateType = initialState, action: ActionsProfileType): InitialProfileStateType => {
+export const profileReducer = (state: InitialProfileStateType = initialState, action: ActionsProfileType): InitialProfileStateType => {
     switch (action.type) {
         case "PROFILE-PAGE/ADD-POST":
             const newPost: PostsType = {
@@ -138,22 +115,21 @@ const profileReducer = (state: InitialProfileStateType = initialState, action: A
     }
 }
 
-export default profileReducer;
+// actions
+export const addPostAC = (newMessageText: string) =>
+    ({type: "PROFILE-PAGE/ADD-POST", newMessageText} as const)
+export const setUserProfileAC = (profile: ProfilesType) =>
+    ({type: "PROFILE-PAGE/SET-USER-PROFILE", profile} as const)
+export const setStatusAC = (status: string) =>
+    ({type: "PROFILE-PAGE/SET-STATUS", status} as const)
+export const deletePostAC = (postId: number) =>
+    ({type: "PROFILE-PAGE/DELETE-POST", postId} as const)
+export const savePhotoSuccessAC = (photo: string) =>
+    ({type: "PROFILE-PAGE/SAVE-PHOTO-SUCCESS", photo} as const)
+export const increaseLikeAC = (postId: number) =>
+    ({type: "PROFILE-PAGE/INCREASE-LIKE", postId} as const)
 
-export const addPostAC = (newMessageText: string): AddPostActionType => ({
-    type: "PROFILE-PAGE/ADD-POST", newMessageText} as const)
-export const setUserProfileAC = (profile: ProfilesType): setUserProfileActionType => ({
-    type: "PROFILE-PAGE/SET-USER-PROFILE", profile} as const)
-export const setStatusAC = (status: string): setStatusActionType => ({
-    type: "PROFILE-PAGE/SET-STATUS", status} as const)
-export const deletePostAC = (postId: number): deletePostActionType => ({
-    type: "PROFILE-PAGE/DELETE-POST", postId} as const)
-export const savePhotoSuccessAC = (photo: string): savePhotoActionType => ({
-    type: "PROFILE-PAGE/SAVE-PHOTO-SUCCESS", photo} as const)
-export const increaseLikeAC = (postId: number) => ({
-    type: "PROFILE-PAGE/INCREASE-LIKE", postId} as const)
-
-
+// thunks
 export const getUserProfileTC = (userId: number): ThunkAction<void, AppStateType, unknown, ActionsProfileType> => {
     return async dispatch => {
         const response = await userAPI.getProfile(userId)

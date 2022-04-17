@@ -55,9 +55,6 @@ export const profileAPI = {
     },
     changeProfileData(profile: FormProfileDataType) {
         return instance.put(`profile`, profile)
-            // .then(response => {
-            //     return response.data
-            // })
     }
 }
 

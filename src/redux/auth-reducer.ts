@@ -2,26 +2,17 @@ import {ThunkAction} from "redux-thunk";
 import {AppStateType} from "./redux-store";
 import {authAPI, securityAPI} from "../api/api";
 
+// types
 export type DataType = {
     userId: number
     email: string | null
     login: string | null
 }
 
-export type setUsersDataActionType = {
-    type: "AUTH/SET-USERS-DATA"
-    data: DataType
-}
-export type setIsAuthDataActionType = {
-    type: "AUTH/SET-IS-AUTH"
-    isAuth: boolean
-}
-export type getCaptchaUrlActionType = {
-    type: "AUTH/GET-CAPTCHA-URL-SUCCESS"
-    captchaUrl: string | null
-}
-
-type AuthReducerActionsType = setUsersDataActionType | setIsAuthDataActionType | getCaptchaUrlActionType
+type AuthReducerActionsType =
+    | ReturnType<typeof setAuthUserDataAC>
+    | ReturnType<typeof setIsAuthAC>
+    | ReturnType<typeof getCaptchaUrlSuccessAC>
 
 export type InitialAuthStateType = typeof initialState
 
@@ -36,8 +27,7 @@ const initialState = {
     captchaUrl: null as string | null  // if null, then captcha is not required
 }
 
-const authReducer = (state: InitialAuthStateType = initialState, action: AuthReducerActionsType): InitialAuthStateType => {
-
+export const authReducer = (state: InitialAuthStateType = initialState, action: AuthReducerActionsType): InitialAuthStateType => {
     switch (action.type) {
         case "AUTH/SET-USERS-DATA":
             return {...state, data: action.data}
@@ -50,15 +40,15 @@ const authReducer = (state: InitialAuthStateType = initialState, action: AuthRed
     }
 }
 
-export default authReducer;
+// actions
+export const setAuthUserDataAC = (userId: number, email: string, login: string) =>
+    ({type: "AUTH/SET-USERS-DATA", data: {userId, email, login}} as const)
+export const setIsAuthAC = (isAuth: boolean) =>
+    ({type: "AUTH/SET-IS-AUTH", isAuth} as const)
+export const getCaptchaUrlSuccessAC = (captchaUrl: string | null ) =>
+    ({type: "AUTH/GET-CAPTCHA-URL-SUCCESS", captchaUrl} as const)
 
-export const setAuthUserDataAC = (userId: number, email: string, login: string): setUsersDataActionType => (
-    {type: "AUTH/SET-USERS-DATA", data: {userId, email, login}} as const)
-export const setIsAuthAC = (isAuth: boolean) => ({type: "AUTH/SET-IS-AUTH", isAuth} as const)
-export const getCaptchaUrlSuccessAC = (captchaUrl: string | null ) => ({
-    type: "AUTH/GET-CAPTCHA-URL-SUCCESS", captchaUrl} as const)
-
-
+// thunks
 export const getAuthUserDataTC = (): ThunkAction<void, AppStateType, unknown, AuthReducerActionsType> => {
     return async dispatch => {
         const response = await authAPI.me();
@@ -76,7 +66,6 @@ export const loginTC = (email: string | null,
                         captcha: string,
                         setStatus: (status: string) => void): ThunkAction<void, AppStateType, unknown, AuthReducerActionsType> => {
     return async dispatch => {
-        debugger
         const response = await authAPI.login(email, password, rememberMe, captcha);
         if (response.data.resultCode === 0) {
             //success, get auth data

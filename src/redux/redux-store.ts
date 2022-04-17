@@ -1,12 +1,12 @@
-import {applyMiddleware, combineReducers, compose, createStore, Store} from "redux";
-import profileReducer from "./profile-reducer";
-import dialogsReducer from "./dialogs-reducer";
-import sidebarReducer from "./sidebar-reducer";
-import authReducer from "./auth-reducer";
-import usersReducer from "./users-reducer";
-import appReducer from "./app-reducer";
+import {applyMiddleware, combineReducers, createStore} from "redux";
 import thunkMiddleware from "redux-thunk";
 import {composeWithDevTools} from "redux-devtools-extension";
+import {authReducer} from "./auth-reducer";
+import {dialogsReducer} from "./dialogs-reducer";
+import {usersReducer} from "./users-reducer";
+import {profileReducer} from "./profile-reducer";
+import {appReducer} from "./app-reducer";
+import {sidebarReducer} from "./sidebar-reducer";
 
 
 // определить автоматически тип всего объекта состояния
@@ -24,13 +24,8 @@ const rootReducer = combineReducers({
 })
 
 // непосредственно создаём store
-
-// export const store: Store<AppStateType> = createStore(rootReducer, applyMiddleware(thunkMiddleware));
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunkMiddleware)));
+export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunkMiddleware)));
 
 // а это, чтобы можно было в консоли браузера обращаться к store в любой момент
 //@ts-ignore
 window.store = store;
-
-export default store;
-

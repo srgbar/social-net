@@ -3,6 +3,7 @@ import {AppStateType} from "./redux-store";
 import {ThunkAction} from "redux-thunk";
 import {updateObjectInArray} from "../utils/object-helpers";
 
+// types
 export type UsersType = {
     id: number
     photos: {
@@ -15,44 +16,14 @@ export type UsersType = {
     location: { city: string, country: string }
 }
 
-export type FollowActionType = {
-    type: "USERS-PAGE/FOLLOW"
-    userId: number
-}
-export type UnfollowActionType = {
-    type: "USERS-PAGE/UNFOLLOW"
-    userId: number
-}
-export type setUsersActionType = {
-    type: "USERS-PAGE/SET-USERS"
-    users: Array<UsersType>
-}
-export type setCurrentPageActionType = {
-    type: "USERS-PAGE/SET-CURRENT-PAGE"
-    currentPage: number
-}
-export type setUsersTotalCountActionType = {
-    type: "USERS-PAGE/SET-TOTAL-USERS-COUNT"
-    count: number
-}
-export type toggleIsFetchingActionType = {
-    type: "USERS-PAGE/TOGGLE-IS-FETCHING"
-    isFetching: boolean
-}
-export type toggleFollowingProgressActionType = {
-    type: "USERS-PAGE/TOGGLE-IS-FOLLOWING-PROGRESS"
-    isFetching: boolean
-    userId: number
-}
-
 type ActionsUsersType =
-    FollowActionType
-    | UnfollowActionType
-    | setUsersActionType
-    | setCurrentPageActionType
-    | setUsersTotalCountActionType
-    | toggleIsFetchingActionType
-    | toggleFollowingProgressActionType
+    | ReturnType<typeof followSuccessAC>
+    | ReturnType<typeof unfollowSuccessAC>
+    | ReturnType<typeof setUsersAC>
+    | ReturnType<typeof setCurrentPageAC>
+    | ReturnType<typeof setTotalUsersCountAC>
+    | ReturnType<typeof toggleIsFetchingAC>
+    | ReturnType<typeof toggleFollowingProgressAC>
 
 export type InitialUsersStateType = typeof initialState
 
@@ -65,7 +36,7 @@ const initialState = {
     followingInProgress: [] as Array<number>
 }
 
-const usersReducer = (state: InitialUsersStateType = initialState, action: ActionsUsersType): InitialUsersStateType => {
+export const usersReducer = (state: InitialUsersStateType = initialState, action: ActionsUsersType): InitialUsersStateType => {
     switch (action.type) {
         case "USERS-PAGE/FOLLOW":
             return {
@@ -84,7 +55,7 @@ const usersReducer = (state: InitialUsersStateType = initialState, action: Actio
             return {...state, currentPage: action.currentPage}
         }
         case "USERS-PAGE/SET-TOTAL-USERS-COUNT": {
-            return {...state, totalUsersCount: action.count}
+            return {...state, totalUsersCount: action.totalUsersCount}
         }
         case "USERS-PAGE/TOGGLE-IS-FETCHING": {
             return {...state, isFetching: action.isFetching}
@@ -101,24 +72,23 @@ const usersReducer = (state: InitialUsersStateType = initialState, action: Actio
     }
 }
 
-export default usersReducer;
-
-export const followSuccessAC = (userId: number): FollowActionType => (
+// actions
+export const followSuccessAC = (userId: number) => (
     {type: "USERS-PAGE/FOLLOW", userId} as const)
-export const unfollowSuccessAC = (userId: number): UnfollowActionType => (
+export const unfollowSuccessAC = (userId: number) => (
     {type: "USERS-PAGE/UNFOLLOW", userId} as const)
-export const setUsersAC = (users: Array<UsersType>): setUsersActionType => (
+export const setUsersAC = (users: Array<UsersType>) => (
     {type: "USERS-PAGE/SET-USERS", users} as const)
-export const setCurrentPageAC = (currentPage: number): setCurrentPageActionType => (
+export const setCurrentPageAC = (currentPage: number) => (
     {type: "USERS-PAGE/SET-CURRENT-PAGE", currentPage} as const)
-export const setTotalUsersCountAC = (totalUsersCount: number): setUsersTotalCountActionType => (
-    {type: "USERS-PAGE/SET-TOTAL-USERS-COUNT", count: totalUsersCount} as const)
-export const toggleIsFetchingAC = (isFetching: boolean): toggleIsFetchingActionType => (
+export const setTotalUsersCountAC = (totalUsersCount: number) => (
+    {type: "USERS-PAGE/SET-TOTAL-USERS-COUNT", totalUsersCount} as const)
+export const toggleIsFetchingAC = (isFetching: boolean) => (
     {type: "USERS-PAGE/TOGGLE-IS-FETCHING", isFetching} as const)
-export const toggleFollowingProgressAC = (isFetching: boolean, userId: number): toggleFollowingProgressActionType => (
+export const toggleFollowingProgressAC = (isFetching: boolean, userId: number) => (
     {type: "USERS-PAGE/TOGGLE-IS-FOLLOWING-PROGRESS", isFetching, userId} as const)
 
-
+// thunks
 export const requestUsersTC = (page: number, pageSize: number)
     : ThunkAction<void, AppStateType, unknown, ActionsUsersType> => {
     return async dispatch => {
