@@ -1,16 +1,16 @@
 import React from "react";
 import s from "./Users.module.css";
 import {UsersPropsType} from "./UsersContainer";
-import Paginator from "../common/Paginator/Paginator";
 import User from "./User";
+import Paginator_2 from "../common/Paginator/Paginator_2";
 
 const Users = (props: UsersPropsType) => {
 
     return <div className={s.usersPage}>
-        <Paginator currentPage={props.currentPage}
-                   onPageChanged={props.onPageChanged}
-                   totalItemsCount={props.totalUsersCount}
-                   pageSize={props.pageSize}
+        <Paginator_2 currentPage={props.currentPage}
+                     onPageChanged={props.onPageChanged}
+                     totalItemsCount={props.totalUsersCount}
+                     pageSize={props.pageSize}
         />
         <div className={s.users}>
             {
